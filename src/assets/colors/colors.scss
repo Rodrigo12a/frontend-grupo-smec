@@ -1,0 +1,67 @@
+/* Light Theme */
+$font-color: #000000;
+$font-color-hover: #1e4063;
+$font-color-inerit: #ffffff;
+$background-color: #ffffff;
+$background-inerit: #f8f8fb;
+$box-shadow:  0 0 1.875em 0.5rem rgba(113, 113, 113, 0.17);
+$box-shadow-nav: 0.0625rem 0.0625rem 1.875rem 0 rgba(128, 128, 128, 0.1);
+$box-shadow-color: rgba(12 12 12 / 19%);
+$border-color: #e0e6ed;
+$input-border: #e6e6e6;
+$input-border-focus: #4c9ec3;
+$placeholder: #d4d4d4;
+
+
+/* Dark Theme */
+$font-color-dark: #c8c8c8;
+$font-color-hover-dark: #46b1d3;
+$font-color-inerit-dark: #000000;
+$background-color-dark: #2c2c2c;
+$background-inerit-dark: #000000;
+$box-shadow-dark: 0 0 1.875em 0.5rem rgb(255 255 255 / 17%);
+$box-shadow-dark-color: rgb(255 255 255 / 10%);
+$box-shadow-nav-dark: 0.1875rem 0.1875rem 1.875rem 0 rgba(113, 113, 113, 0.28);
+$border-color-dark: #252525;
+$input-border-dark: #3f3f3f;
+$input-border-dark-focus: #aaaaaa;
+$placeholder-dark: #5c5c5c;
+
+
+/* Root Colors Theme */
+/* ============== Root Colors Theme (Actualizado) ============== */
+:root {
+  // Color Primario (Azul corporativo principal - 1e4063)
+  --color-primary: #1e4063;
+  --color-primary-rgb: 30,64,99;
+  --color-primary-contrast: #ffffff;
+  --color-primary-contrast-rgb: 255,255,255;
+  --color-primary-shade: #1a3856;
+  --color-primary-tint: #355373;
+
+  // Color Secundario (Azul técnico - 4c9ec3)
+  --color-secondary: #4c9ec3;
+  --color-secondary-rgb: 76,158,195;
+  --color-secondary-contrast: #ffffff;
+  --color-secondary-contrast-rgb: 255,255,255;
+  --color-secondary-shade: #438bac;
+  --color-secondary-tint: #5ea8c9;
+
+  // Color Terciario (Cyan industrial - 46b1d3)
+  --color-tertiary: #46b1d3;
+  --color-tertiary-rgb: 70,177,211;
+  --color-tertiary-contrast: #000000;
+  --color-tertiary-contrast-rgb: 0,0,0;
+  --color-tertiary-shade: #3e9cba;
+  --color-tertiary-tint: #59b9d7;
+
+  // Colores de Estado (Mantenidos con ajustes de contraste)
+  --color-success: #2dd55b;
+  --color-warning: #ffc409;
+  --color-danger: #c5000f;
+
+  // Colores Neutros (Ajustados para mejor legibilidad)
+  --color-light: #f8f8fb;  // Fondo claro
+  --color-medium: #6c757d;  // Gris técnico
+  --color-dark: #1e4063;    // Usa el primario para cohesión
+}

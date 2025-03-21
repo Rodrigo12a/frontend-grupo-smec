@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap');
+
+/* Import colors theme */
+@import 'assets/colors/colors.scss';
+
+/* Import custom theme */
+@import 'assets/theme/codemono.scss';

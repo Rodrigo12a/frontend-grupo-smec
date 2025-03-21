@@ -1,0 +1,26 @@
+.avatar-upload {
+  position: relative;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.avatar-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e0e0e0;
+}
+
+.card {
+  border-radius: 15px;
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0 !important;
+}
+
+.form-switch .form-check-input {
+  width: 3em;
+  height: 1.5em;
+}

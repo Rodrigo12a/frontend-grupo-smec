@@ -1,0 +1,161 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<main  class="d-flex">
+  <!-- Sidebar como elemento fijo -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Contenido principal -->
+  <div class="container-fluid flex-grow-1" style="margin-left: 280px;">
+    <div class="row">
+      <div class="col-12 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2 mb-0" style="color: var(--color-primary);">{{operacion}} nuevo Usuario</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <!-- Botones sin cambios -->
+          </div>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="addUser()" class="container-form mt-4">
+          <div class="row g-3">
+              <!-- Sección de nombres -->
+              <div class="col-md-12">
+                  <h5 class="mb-3 border-bottom pb-2">Información Básica</h5>
+              </div>
+
+              <!-- Campo Nombre -->
+              <div class="col-md-4">
+                  <label class="form-label">Nombre(s) <span class="text-danger">*</span></label>
+                  <input type="text"
+                        formControlName="nombre_usuario"
+                         name="nombre_usuario"
+                         class="form-control"
+                         placeholder="Ej. María Guadalupe"
+                         required
+                         pattern="[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,50}">
+              </div>
+
+              <!-- Campo Apellido Paterno -->
+              <div class="col-md-4">
+                  <label class="form-label">Apellido Paterno <span class="text-danger">*</span></label>
+                  <input type="text"
+                        formControlName="ap_usuario"
+                         name="ap_usuario"
+                         class="form-control"
+                         placeholder="Ej. González"
+                         required
+                         pattern="[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,50}">
+              </div>
+
+              <!-- Campo Apellido Materno -->
+              <div class="col-md-4">
+                  <label class="form-label">Apellido Materno <span class="text-danger">*</span></label>
+                  <input type="text"
+                        formControlName="am_usuario"
+                         name="am_usuario"
+                         class="form-control"
+                         placeholder="Ej. Sánchez"
+                         required
+                         pattern="[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,50}">
+              </div>
+
+              <!-- Sección de datos adicionales -->
+              <div class="col-md-12 mt-4">
+                  <h5 class="mb-3 border-bottom pb-2">Configuración Adicional</h5>
+              </div>
+
+              <!-- Campo Email -->
+              <div class="col-md-4">
+                  <label class="form-label">Correo Electrónico <span class="text-danger">*</span></label>
+                  <input type="email"
+                        formControlName="email_usuario"
+                         name="email_usuario"
+                         class="form-control"
+                         placeholder="ejemplo@dominio.com"
+                         required>
+              </div>
+
+              <!-- Campo Contraseña -->
+              <div class="col-md-3">
+                  <label class="form-label">Contraseña <span class="text-danger">*</span></label>
+                  <input type="password"
+                        formControlName="password_usuario"
+                         name="password_usuario"
+                         class="form-control"
+                         placeholder="••••••••"
+                         required
+                         minlength="8">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Confirmar contraseña <span class="text-danger">*</span></label>
+                <input type="password"
+                      formControlName="confirmar_password_usuario"
+                       name="confirmar_password_usuario"
+                       class="form-control"
+                       placeholder="••••••••"
+                       required
+                       minlength="8">
+            </div>
+
+              <!-- Campo Sexo -->
+            <div class="col-md-4 mt-3">
+              <label class="form-label">Sexo <span class="text-danger">*</span></label>
+              <select formControlName="sexo_usuario"
+                      name="sexo_usuario"
+                      class="form-select"
+                      required>
+                  <option value="">Seleccionar...</option>
+                  <option value="1">Masculino</option>
+                  <option value="0">Femenino</option>
+              </select>
+            </div>
+
+            <!-- Campo Rol -->
+            <div class="col-md-4 mt-3">
+              <label class="form-label">Tipo de Usuario <span class="text-danger">*</span></label>
+              <select formControlName="id_rol"
+                      name="id_rol"
+                      class="form-select"
+                      required>
+                  <option value="">Seleccionar...</option>
+                  <option value="745">Administrador</option>
+                  <option value="125">Cliente</option>
+              </select>
+            </div>
+
+            <!-- Campo Estatus -->
+            <div class="col-md-4 mt-3">
+              <label class="form-label">Estatus <span class="text-danger">*</span></label>
+              <select formControlName="estatus_usuario"
+                      name="estatus_usuario"
+                      class="form-select"
+                      required>
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
+              </select>
+            </div>
+
+              <!-- Botón de enviar -->
+               <div class="row mt-3 text-center">
+                <div class="col-md-6 mt-4">
+                  <button type="submit"
+                          (click)="navigateToUsers()"
+                          class="btn btn-tertiary w-100 py-2">
+                      <i class="fas fa-save me-2"></i>Volver
+                  </button>
+              </div>
+                  <div class="col-md-6 mt-4">
+                    <button
+
+                            type="submit"
+                            class="btn btn-primary w-100 py-2">
+                        <i class="fas fa-save me-2"></i>Guardar Usuario
+                    </button>
+                </div>
+               </div>
+
+          </div>
+      </form>
+
+      </div>
+    </div>
+  </div>
+</main>
+

@@ -1,0 +1,39 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; min-height: 100vh; position: fixed;">
+  <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <span class="fs-4">Bienvenido</span><br>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a [routerLink]="['/user']"
+         routerLinkActive="active"
+         class="nav-link text-white d-flex align-items-center">
+        <i class="bi bi-person-circle me-3 fs-5"></i>
+        <span class="fs-6">Usuarios</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="'/quote-dashboard'"
+         routerLinkActive="active"
+         class="nav-link text-white d-flex align-items-center">
+        <i class="bi bi-credit-card-2-back-fill me-3 fs-5"></i>
+        <span class="fs-6">Cotizaciones</span>
+      </a>
+    </li>
+  </ul>
+
+
+
+  <hr>
+  <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="assets/images/avatars/avatar-01.svg" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>Juan Tzompantzi</strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+          <li><a class="dropdown-item" routerLink="/profile">Mi perfil</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" routerLink="/login">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>

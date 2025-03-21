@@ -1,0 +1,116 @@
+<!-- Start >> Navbar -->
+<nav id="navbar" class="navbar navbar-expand-lg mb-0 px-2 bg-app">
+  <div class="container">
+    <!-- Start >> Navbar items -->
+    <ul class="navbar-nav">
+
+      <li class="nav-item icon-center">
+        <!-- Logo App -->
+
+        <!-- IMG -->
+        <!-- <img class="user user-chip-md mr-2" src="" alt="you logo" /> -->
+
+        <!-- SVG -->
+
+        <img src="assets/images/logo/smec.svg" width="50%" alt="">
+
+
+        <!-- Title app -->
+        <!--h5 class="p-0 m-0 ms-2 fw-bold">{{title}}</h5>-->
+
+      </li>
+    </ul>
+    <div class="ms-auto">
+      <ul class="navbar-nav">
+        <ul class="navbar-nav">
+
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link mx-3" aria-current="page" [routerLink]="'/'" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" >Inicio</a>
+          </li>
+
+          <li class="nav-item d-none d-lg-block">
+            <a class="nav-link mx-3" [routerLink]="'/about-us'" [routerLinkActive]="'active'">sobre nosotros</a>
+          </li>
+
+          <li class="nav-item dropdown d-none d-lg-block">
+            <a class="nav-link dropdown-toggle mx-3" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              servicios
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div class="px-2">
+                <h5 class="dropdown-header fw-bold">Mantenimiento Industrial</h5>
+                <a class="dropdown-item" href="javascript:void(0);">
+                  <span><i class="bi bi-lightning-charge-fill text-primary"></i></span>
+                  <span class="ms-2">Instalaciones Eléctricas</span>
+                </a>
+                <a class="dropdown-item" href="javascript:void(0);">
+                  <span><i class="bi bi-tools text-primary"></i></span>
+                  <span class="ms-2">Soldadura General</span>
+                </a>
+                <a class="dropdown-item" href="javascript:void(0);">
+                  <span><i class="bi bi-cart-plus-fill text-primary"></i></span>
+                  <span class="ms-2">Venta de refacciones industriales</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/quote">
+                  <span><i class="bi bi-credit-card-2-back-fill text-primary"></i></span>
+                  <span class="ms-2">cotizaciones</span>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Registred -->
+          <li class="nav-item dropdown" >
+            <a class="img-user" href="#" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+            <img src="../assets/images/avatars/avatar-01.svg" class="user user-chip-md bg-default" alt="user-image">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+              <div class="row p-2 d-flex align-items-center" style="width: 20rem;">
+                <div class="col-md-3 col-sm-3 col-3">
+                  <img src="./assets/images/avatars/avatar-01.svg" class="user user-chip-xxlg bg-default"
+                    alt="user-image">
+                </div>
+                <div class="col-md-9 col-sm-9 col-9">
+                  <div class="py-3 ps-3">
+                    <div>
+                      <h6 class="text-dark p-0 m-0 text-capitalize"><strong>Jose Tzompantzi Juarez</strong></h6>
+                    </div>
+                    <div>
+                      <small class="text-dark text-capitalize">Ingeniero</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item-user icon-center" routerLink="/profile">
+                  <i class="bi bi-person-circle fs-5 text-primary"></i> <span class="ms-4">Mi Perfil</span>
+                </li>
+                <li class="list-group-item-user icon-center" routerLink="/dashboard">
+                  <i class="bi bi-bar-chart-line-fill fs-5 text-info"></i> <span class="ms-4">Panel Administrativo</span>
+                </li>
+                <li class="list-group-item-user icon-center" routerLink="/login" >
+                  <i class="bi bi-box-arrow-right fs-5 text-danger"></i> <span class="ms-4">Cerrar Sesión</span>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <!-- Not registred -->
+          <button type="button" class="btn btn-login btn-outline-primary" [routerLink]="'/login'">Iniciar sesión</button>
+
+          <!-- Carrito de compras -->
+          <li class="nav-item">
+            <a class="nav-link mx-3 position-relative" href="#">
+              <i class="bi bi-cart fs-5"></i>
+              <span class="badge bg-primary rounded-pill position-absolute top-0 start-100 translate-middle">3</span>
+            </a>
+          </li>
+        </ul>
+      </ul>
+    </div>
+    <!-- End >> Navbar items -->
+  </div>
+</nav>
+<!-- End >> Navbar -->

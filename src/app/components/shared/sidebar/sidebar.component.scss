@@ -1,0 +1,29 @@
+.sidebar {
+  width: 280px;
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.collapsed .nav-link {
+  justify-content: center;
+}
+
+.sidebar.collapsed .bi-chevron-left {
+  transform: rotate(180deg);
+}
+
+.sidebar.collapsed:hover {
+  width: 280px;
+}
+
+.sidebar.collapsed:hover .nav-link span,
+.sidebar.collapsed:hover strong {
+  display: inline-block !important;
+}
+
+.sidebar.collapsed:hover .nav-link {
+  justify-content: start;
+}
