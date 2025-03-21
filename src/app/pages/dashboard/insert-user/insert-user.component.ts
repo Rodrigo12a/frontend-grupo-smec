@@ -123,7 +123,7 @@ getUsuario(id: number): void {
   this._userService.getUsuario(id).subscribe(
     (data: any) => {
       this.loading = false;
-      console.log("📌 Respuesta del backend:", data);
+      console.log("Respuesta del backend:", data);
 
       if (!data.usuario) {
         this.toastr.error('No se encontraron datos del usuario.', 'Error');
@@ -148,7 +148,7 @@ getUsuario(id: number): void {
     },
     error => {
       this.loading = false;
-      console.error("❌ Error al obtener el usuario:", error);
+      console.error("Error al obtener el usuario:", error);
       this.toastr.error('Error al obtener el usuario.', 'Error');
     }
   );

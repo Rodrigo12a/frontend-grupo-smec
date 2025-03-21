@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideRouter(routes),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimations(),    // Animaciones para Toastr
@@ -22,5 +23,5 @@ export const appConfig: ApplicationConfig = {
     )
 
   ],
-  
+
 };
