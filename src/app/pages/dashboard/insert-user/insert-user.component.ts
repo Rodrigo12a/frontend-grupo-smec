@@ -153,4 +153,5 @@ getUsuario(id: number): void {
     }
   );
 }
+
 }
