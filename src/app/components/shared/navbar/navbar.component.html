@@ -1,107 +1,69 @@
 <!-- Start >> Navbar -->
 <nav id="navbar" class="navbar navbar-expand-lg mb-0 px-2 bg-app">
   <div class="container">
-    <!-- Start >> Navbar items -->
-    <ul class="navbar-nav">
+    <!-- Logo + Toggler Mobile -->
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand p-0 me-3">
+        <img src="assets/images/logo/smec.svg" alt="Logo" style="max-width: 120px;">
+      </a>
 
-      <li class="nav-item icon-center">
-        <!-- Logo App -->
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarContent"
+              aria-controls="navbarContent" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
 
-        <!-- IMG -->
-        <!-- <img class="user user-chip-md mr-2" src="" alt="you logo" /> -->
-
-        <!-- SVG -->
-
-        <img src="assets/images/logo/smec.svg" width="50%" alt="">
-
-
-        <!-- Title app -->
-        <!--h5 class="p-0 m-0 ms-2 fw-bold">{{title}}</h5>-->
-
-      </li>
-    </ul>
-    <div class="ms-auto">
+    <!-- Contenido colapsable -->
+    <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav">
-        <!-- Eliminé el <ul> duplicado aquí -->
-
-        <li class="nav-item d-none d-lg-block">
-          <a class="nav-link mx-3" aria-current="page" [routerLink]="'/'"
+        <!-- Elementos de navegación -->
+        <li class="nav-item">
+          <a class="nav-link mx-3" [routerLink]="'/'"
              [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">PRUEBA</a>
         </li>
 
-        <li class="nav-item d-none d-lg-block">
+        <li class="nav-item">
           <a class="nav-link mx-3" [routerLink]="'/about-us'"
-             [routerLinkActive]="'active'">sobre nosotros</a>
+             [routerLinkActive]="'active'">Sobre nosotros</a>
         </li>
 
-        <li class="nav-item dropdown d-none d-lg-block">
-          <a class="nav-link dropdown-toggle mx-3" href="#" id="navbarDropdownMenuLink" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            servicios
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mx-3" href="#"
+             role="button" data-bs-toggle="dropdown">
+            Servicios
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <div class="dropdown-menu">
             <div class="px-2">
               <h5 class="dropdown-header fw-bold">Mantenimiento Industrial</h5>
               <a class="dropdown-item" href="javascript:void(0);">
-                <span><i class="bi bi-lightning-charge-fill text-primary"></i></span>
-                <span class="ms-2">Instalaciones Eléctricas</span>
+                <i class="bi bi-lightning-charge-fill text-primary me-2"></i>
+                Instalaciones Eléctricas
               </a>
               <a class="dropdown-item" href="javascript:void(0);">
-                <span><i class="bi bi-tools text-primary"></i></span>
-                <span class="ms-2">Soldadura General</span>
+                <i class="bi bi-tools text-primary me-2"></i>
+                Soldadura General
               </a>
               <a class="dropdown-item" routerLink="/store">
-                <span><i class="bi bi-cart-plus-fill text-primary"></i></span>
-                <span class="ms-2">Venta de refacciones industriales</span>
+                <i class="bi bi-cart-plus-fill text-primary me-2"></i>
+                Venta de refacciones industriales
               </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" routerLink="/quote">
-                <span><i class="bi bi-credit-card-2-back-fill text-primary"></i></span>
-                <span class="ms-2">cotizaciones</span>
+                <i class="bi bi-credit-card-2-back-fill text-primary me-2"></i>
+                Cotizaciones
               </a>
             </div>
           </div>
         </li>
+      </ul>
 
+      <!-- Elementos derechos -->
+      <ul class="navbar-nav ms-auto">
+        <!-- ... (mantén el resto de tu código existente aquí) -->
         <!-- Registred -->
         <li class="nav-item dropdown" *ngIf="registred">
-          <a class="img-user" href="#" id="navbarDropdownMenuLink2" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="../assets/images/avatars/avatar-01.svg"
-                 class="user user-chip-md bg-default" alt="user-image">
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-            <div class="row p-2 d-flex align-items-center" style="width: 20rem;">
-              <div class="col-md-3 col-sm-3 col-3">
-                <img src="./assets/images/avatars/avatar-01.svg"
-                     class="user user-chip-xxlg bg-default" alt="user-image">
-              </div>
-              <div class="col-md-9 col-sm-9 col-9">
-                <div class="py-3 ps-3">
-                  <div>
-                    <h6 class="text-dark p-0 m-0 text-capitalize"><strong>{{userName}}</strong></h6>
-                  </div> <!-- Faltaba cerrar este div -->
-                  <div>
-                    <small class="text-dark text-capitalize">{{userRole}}</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item-user icon-center" routerLink="/profile">
-                <i class="bi bi-person-circle fs-5 text-primary"></i>
-                <span class="ms-4">Mi Perfil</span>
-              </li>
-              <li class="list-group-item-user icon-center" routerLink="/user">
-                <i class="bi bi-bar-chart-line-fill fs-5 text-info"></i>
-                <span class="ms-4">Panel Administrativo</span>
-              </li>
-              <li class="list-group-item-user icon-center" (click)="logOut()">
-                <i class="bi bi-box-arrow-right fs-5 text-danger"></i>
-                <span class="ms-4">Cerrar Sesión</span>
-              </li>
-            </ul>
-          </div>
+          <!-- ... (código del dropdown de usuario) -->
         </li>
 
         <!-- Not registred -->
@@ -109,9 +71,8 @@
           <button type="button" class="btn btn-login btn-outline-primary"
                   routerLink="/login">Iniciar sesión</button>
         </li>
-      </ul> <!-- Cierre del único ul.navbar-nav -->
+      </ul>
     </div>
-    <!-- End >> Navbar items -->
   </div>
 </nav>
 <!-- End >> Navbar -->

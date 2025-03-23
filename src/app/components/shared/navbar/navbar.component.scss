@@ -1,46 +1,18 @@
-#navbar {
-  z-index: 1030;
-  background: #fff !important;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-}
-
-.navbar-brand img {
-  transition: transform 0.3s ease;
-}
-
-.navbar-brand:hover img {
-  transform: scale(1.05);
-}
-
 @media (max-width: 991.98px) {
-  #mainNavbar {
-    background: #fff;
-    padding: 1rem;
-    margin-top: 0.5rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  #navbarContent {
+    margin-top: 15px;
   }
 
-  .dropdown-menu {
-    width: 100% !important;
-    margin-top: 0.5rem;
+  .navbar-nav {
+    margin: 10px 0;
   }
 
-  .btn-outline-primary {
+  .nav-item {
+    margin: 5px 0;
+  }
+
+  .btn-login {
     width: 100%;
-    margin: 0.5rem 0;
-  }
-
-  .nav-item.dropdown .dropdown-menu {
-    position: static !important;
-    transform: none !important;
-  }
-}
-
-@media (min-width: 992px) {
-  .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0;
+    margin-top: 10px;
   }
 }
