@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { usuario } from '../interfaces/usuario';
 import { Observable } from 'rxjs';
 import { Login } from '../interfaces/login';
+import { tap } from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -22,7 +24,14 @@ export class UserService {
       return this.http.post(`${this.myAppUrl}${this.myApiUrl}register`, usuario);
    }
 
-   Login(userLogin: Login): Observable<string> {
-      return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}login`, userLogin);
-   }
+Login(userLogin: Login): Observable<any> {
+  return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}login`, userLogin)
+    .pipe(
+      tap(response => {
+        // Guarda el token en localStorage
+        localStorage.setItem('token', response.token);
+      })
+    );
+}
+
 }
