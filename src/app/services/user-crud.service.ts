@@ -17,9 +17,7 @@ export class UserCrudService {
     this.myApiUrl = 'api/user/';
   }
   getListUsuarios(): Observable<usuario[]> {
-    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}`).pipe(
-      map(response => response.listaUsuarios) // Extrae el array listaUsuarios
-    );
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}`);
   }
 
   deleteUsuario(id: number): Observable<void> {
