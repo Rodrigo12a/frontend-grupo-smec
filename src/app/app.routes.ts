@@ -43,18 +43,18 @@ export const routes: Routes = [
   },
   {
     path: 'user',
-    component: UserComponent, canActivate: [authGuard]
+    component: UserComponent, //canActivate: [authGuard]
   },{
     path: 'update-user',
-    component: UpdateUserComponent, canActivate: [authGuard]
+    component: UpdateUserComponent, //canActivate: [authGuard]
   },
   {
     path: 'insert-user',
-    component: InsertUserComponent, canActivate: [authGuard]
+    component: InsertUserComponent, //canActivate: [authGuard]
   },
   {
     path: 'update-user/:id',
-    component: InsertUserComponent, canActivate: [authGuard]
+    component: InsertUserComponent, //canActivate: [authGuard]
   },
   {
     path: 'quote-dashboard',

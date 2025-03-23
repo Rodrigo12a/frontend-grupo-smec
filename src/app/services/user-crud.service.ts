@@ -14,7 +14,7 @@ export class UserCrudService {
 
   constructor( private http: HttpClient) {
     this.myAppUrl = enviroment.endPoint;
-    this.myApiUrl = 'api/user/profile/';
+    this.myApiUrl = 'api/user/';
   }
   getListUsuarios(): Observable<usuario[]> {
     return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}`).pipe(

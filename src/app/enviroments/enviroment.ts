@@ -1,4 +1,4 @@
 export const enviroment = {
   production: false,
-  endPoint: 'http://localhost:3001/'
+  endPoint: 'https://server-smec-production.up.railway.app/'
 }
