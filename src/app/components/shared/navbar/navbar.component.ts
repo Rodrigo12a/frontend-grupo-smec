@@ -37,17 +37,21 @@ export class NavbarComponent implements OnInit {
     const token = localStorage.getItem('token');
     this.registred = !!token;
 
-    if (token) {
+    if (token && token.split('.').length === 3) { // Verifica que el token tenga 3 partes
       try {
         const decoded: DecodedToken = jwtDecode(token);
-        this.userName = decoded.nombre; // Asignar el nombre del usuario
-        this.userRole = decoded.rol || 'Usuario'; // Asignar rol o valor por defecto
+        this.userName = decoded.nombre;
+        this.userRole = decoded.rol || 'Usuario'; // Valor por defecto
       } catch (error) {
         console.error('Error decodificando token:', error);
         this.logOut();
       }
+    } else {
+      console.error('Token inválido o no presente');
+      this.logOut();
     }
   }
+
 
   logOut(): void {
     localStorage.removeItem('token');
