@@ -3,58 +3,104 @@
   <div class="container-fluid">
     <!-- Logo -->
     <a class="navbar-brand" href="#">
-      <img src="assets/images/logo/smec.svg" alt="Logo" style="max-width: 150px;">
+      <img src="assets/images/logo/smec.svg" alt="Logo SMEC" style="height: 45px;">
     </a>
 
     <!-- Toggler Mobile -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#mainNavbar" aria-controls="mainNavbar"
-            aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar" aria-expanded="false"
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <!-- Contenido del Navbar -->
     <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
+      <!-- Menú izquierda -->
       <ul class="navbar-nav">
-        <!-- Elementos izquierda -->
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/'" routerLinkActive="active">PRUEBA</a>
+          <a class="nav-link mx-2" [routerLink]="'/'"
+             routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">INICIO</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/about-us'" routerLinkActive="active">SOBRE NOSOTROS</a>
+          <a class="nav-link mx-2" [routerLink]="'/about-us'"
+             routerLinkActive="active">SOBRE NOSOTROS</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle mx-2" href="#"
+             role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">
             SERVICIOS
           </a>
-          <div class="dropdown-menu">
-            <div class="px-2">
-              <h5 class="dropdown-header fw-bold">Mantenimiento Industrial</h5>
-              <a class="dropdown-item" href="#">
-                <i class="bi bi-lightning-charge-fill text-primary me-2"></i>
+          <div class="dropdown-menu dropdown-menu-lg-start">
+            <div class="px-3 py-2">
+              <h6 class="dropdown-header fw-bold text-primary">Mantenimiento Industrial</h6>
+              <a class="dropdown-item py-2" routerLink="/electrical">
+                <i class="bi bi-lightning-charge-fill me-2 text-warning"></i>
                 Instalaciones Eléctricas
               </a>
-              <!-- Resto de items del dropdown... -->
+              <a class="dropdown-item py-2" routerLink="/welding">
+                <i class="bi bi-tools me-2 text-success"></i>
+                Soldadura Industrial
+              </a>
+              <a class="dropdown-item py-2" routerLink="/store">
+                <i class="bi bi-cart-check-fill me-2 text-info"></i>
+                Refacciones Industriales
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item py-2" routerLink="/quote">
+                <i class="bi bi-file-earmark-text-fill me-2 text-danger"></i>
+                Solicitar Cotización
+              </a>
             </div>
           </div>
         </li>
       </ul>
 
-      <!-- Elementos derecha -->
-      <ul class="navbar-nav">
+      <!-- Menú derecha -->
+      <ul class="navbar-nav align-items-lg-center">
+        <!-- Usuario Registrado -->
         <li class="nav-item dropdown" *ngIf="registred">
-          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
-            <img src="../assets/images/avatars/avatar-01.svg"
-                 class="user user-chip-md bg-default" alt="user-image">
+          <a class="nav-link py-0" href="#" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="d-flex align-items-center">
+              <img src="assets/images/avatars/avatar-01.svg"
+                   class="user user-chip-md bg-default me-2"
+                   alt="Perfil usuario">
+              <span class="d-none d-lg-inline text-dark">{{userName}}</span>
+            </div>
           </a>
-          <div class="dropdown-menu dropdown-menu-end">
-            <!-- Contenido del dropdown usuario... -->
+          <div class="dropdown-menu dropdown-menu-end border-0 shadow">
+            <div class="p-3 bg-light">
+              <div class="d-flex align-items-center">
+                <img src="assets/images/avatars/avatar-01.svg"
+                     class="user user-chip-lg bg-default me-3"
+                     alt="Perfil">
+                <div>
+                  <h6 class="mb-0 text-dark">{{userName}}</h6>
+                  <small class="text-muted">{{userRole}}</small>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/profile">
+              <i class="bi bi-person-circle me-2"></i> Mi Perfil
+            </a>
+            <a class="dropdown-item" routerLink="/dashboard">
+              <i class="bi bi-speedometer2 me-2"></i> Panel de Control
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" (click)="logOut()">
+              <i class="bi bi-box-arrow-right me-2"></i> Cerrar Sesión
+            </a>
           </div>
         </li>
+
+        <!-- Usuario No Registrado -->
         <li class="nav-item" *ngIf="!registred">
-          <button class="btn btn-outline-primary ms-2" routerLink="/login">
-            Iniciar sesión
+          <button class="btn btn-outline-primary mx-2 my-1"
+                  routerLink="/login">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
           </button>
         </li>
       </ul>

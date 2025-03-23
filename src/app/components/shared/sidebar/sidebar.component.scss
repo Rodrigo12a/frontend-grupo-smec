@@ -1,3 +1,21 @@
+body {
+  padding-top: 80px; /* Compensa el navbar fixed */
+}
+
+#navbar {
+  z-index: 1030;
+  background: #fff !important; /* Forzar color de fondo */
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 991px) {
+  #navbarContent {
+    background: #fff;
+    padding: 20px;
+    margin-top: 10px;
+  }
+}
+
 .sidebar {
   width: 280px;
   transition: all 0.3s ease;
@@ -27,3 +45,4 @@
 .sidebar.collapsed:hover .nav-link {
   justify-content: start;
 }
+
