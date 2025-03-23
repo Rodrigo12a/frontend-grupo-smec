@@ -40,8 +40,8 @@ export class NavbarComponent implements OnInit {
     if (token) {
       try {
         const decoded: DecodedToken = jwtDecode(token);
-        this.userName = decoded.nombre;
-        this.userRole = decoded.rol || 'Usuario'; // Valor por defecto
+        this.userName = decoded.nombre; // Asignar el nombre del usuario
+        this.userRole = decoded.rol || 'Usuario'; // Asignar rol o valor por defecto
       } catch (error) {
         console.error('Error decodificando token:', error);
         this.logOut();

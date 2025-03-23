@@ -1,67 +1,14 @@
 <!-- Start >> Navbar -->
 <nav id="navbar" class="navbar navbar-expand-lg mb-0 px-2 bg-app">
   <div class="container">
-    <!-- Start >> Navbar items -->
     <ul class="navbar-nav">
-
       <li class="nav-item icon-center">
-        <!-- Logo App -->
-
-        <!-- IMG -->
-        <!-- <img class="user user-chip-md mr-2" src="" alt="you logo" /> -->
-
-        <!-- SVG -->
-
         <img src="assets/images/logo/smec.svg" width="50%" alt="">
-
-
-        <!-- Title app -->
-        <!--h5 class="p-0 m-0 ms-2 fw-bold">{{title}}</h5>-->
-
       </li>
     </ul>
     <div class="ms-auto">
       <ul class="navbar-nav">
-        <!-- Eliminé el <ul> duplicado aquí -->
-
-        <li class="nav-item d-none d-lg-block">
-          <a class="nav-link mx-3" aria-current="page" [routerLink]="'/'"
-             [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">PRUEBA</a>
-        </li>
-
-        <li class="nav-item d-none d-lg-block">
-          <a class="nav-link mx-3" [routerLink]="'/about-us'"
-             [routerLinkActive]="'active'">sobre nosotros</a>
-        </li>
-
-        <li class="nav-item dropdown d-none d-lg-block">
-          <a class="nav-link dropdown-toggle mx-3" href="#" id="navbarDropdownMenuLink" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            servicios
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <div class="px-2">
-              <h5 class="dropdown-header fw-bold">Mantenimiento Industrial</h5>
-              <a class="dropdown-item" href="javascript:void(0);">
-                <span><i class="bi bi-lightning-charge-fill text-primary"></i></span>
-                <span class="ms-2">Instalaciones Eléctricas</span>
-              </a>
-              <a class="dropdown-item" href="javascript:void(0);">
-                <span><i class="bi bi-tools text-primary"></i></span>
-                <span class="ms-2">Soldadura General</span>
-              </a>
-              <a class="dropdown-item" routerLink="/store">
-                <span><i class="bi bi-cart-plus-fill text-primary"></i></span>
-                <span class="ms-2">Venta de refacciones industriales</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/quote">
-                <span><i class="bi bi-credit-card-2-back-fill text-primary"></i></span>
-                <span class="ms-2">cotizaciones</span>
-              </a>
-            </div>
-          </div>
-        </li>
+        <!-- Otras rutas -->
 
         <!-- Registred -->
         <li class="nav-item dropdown" *ngIf="registred">
@@ -80,7 +27,7 @@
                 <div class="py-3 ps-3">
                   <div>
                     <h6 class="text-dark p-0 m-0 text-capitalize"><strong>{{userName}}</strong></h6>
-                  </div> <!-- Faltaba cerrar este div -->
+                  </div>
                   <div>
                     <small class="text-dark text-capitalize">{{userRole}}</small>
                   </div>
@@ -106,12 +53,11 @@
 
         <!-- Not registred -->
         <li class="nav-item" *ngIf="!registred">
-          <button type="button" class="btn btn-login btn-outline-primary"
-                  routerLink="/login">Iniciar sesión</button>
+          <button type="button" class="btn btn-login btn-outline-primary" routerLink="/login">Iniciar sesión</button>
         </li>
-      </ul> <!-- Cierre del único ul.navbar-nav -->
+      </ul>
     </div>
-    <!-- End >> Navbar items -->
   </div>
 </nav>
 <!-- End >> Navbar -->
+
