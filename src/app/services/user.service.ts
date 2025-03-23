@@ -29,7 +29,9 @@ Login(userLogin: Login): Observable<any> {
     .pipe(
       tap(response => {
         // Guarda el token en localStorage
-        localStorage.setItem('token', response.token);
+        const token = localStorage.getItem("token");
+        console.log(token); // Debe mostrar el token correctamente
+
       })
     );
 }
