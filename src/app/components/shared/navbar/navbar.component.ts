@@ -23,7 +23,7 @@ interface DecodedToken {
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
-  registred: boolean = false;
+  registred: boolean = true;
   userName: string = '';
   userRole: string = '';
 
