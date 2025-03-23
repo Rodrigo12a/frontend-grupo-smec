@@ -1,63 +1,51 @@
 <!-- Start >> Navbar -->
 <nav id="navbar" class="navbar navbar-expand-lg mb-0 px-2 bg-app">
   <div class="container">
-    <ul class="navbar-nav">
-      <li class="nav-item icon-center">
-        <img src="assets/images/logo/smec.svg" width="50%" alt="">
-      </li>
-    </ul>
-    <div class="ms-auto">
-      <ul class="navbar-nav">
-        <!-- Otras rutas -->
+    <!-- Logo -->
+    <a class="navbar-brand">
+      <img src="assets/images/logo/smec.svg" width="50%" alt="Logo">
+    </a>
 
-        <!-- Registred -->
+    <!-- Botón para móviles -->
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarContent"
+            aria-controls="navbarContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenido colapsable -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <!-- Elementos del menú derecho -->
+
+        <!-- Usuario registrado -->
         <li class="nav-item dropdown" *ngIf="registred">
           <a class="img-user" href="#" id="navbarDropdownMenuLink2" role="button"
              data-bs-toggle="dropdown" aria-expanded="false">
             <img src="../assets/images/avatars/avatar-01.svg"
                  class="user user-chip-md bg-default" alt="user-image">
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink2">
             <div class="row p-2 d-flex align-items-center" style="width: 20rem;">
-              <div class="col-md-3 col-sm-3 col-3">
-                <img src="./assets/images/avatars/avatar-01.svg"
-                     class="user user-chip-xxlg bg-default" alt="user-image">
-              </div>
-              <div class="col-md-9 col-sm-9 col-9">
-                <div class="py-3 ps-3">
-                  <div>
-                    <h6 class="text-dark p-0 m-0 text-capitalize"><strong>{{userName}}</strong></h6>
-                  </div>
-                  <div>
-                    <small class="text-dark text-capitalize">{{userRole}}</small>
-                  </div>
-                </div>
-              </div>
+              <!-- Contenido del dropdown... -->
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item-user icon-center" routerLink="/profile">
-                <i class="bi bi-person-circle fs-5 text-primary"></i>
-                <span class="ms-4">Mi Perfil</span>
-              </li>
-              <li class="list-group-item-user icon-center" routerLink="/user">
-                <i class="bi bi-bar-chart-line-fill fs-5 text-info"></i>
-                <span class="ms-4">Panel Administrativo</span>
-              </li>
-              <li class="list-group-item-user icon-center" (click)="logOut()">
-                <i class="bi bi-box-arrow-right fs-5 text-danger"></i>
-                <span class="ms-4">Cerrar Sesión</span>
-              </li>
+              <!-- Elementos del dropdown... -->
             </ul>
           </div>
         </li>
 
-        <!-- Not registred -->
+        <!-- Usuario no registrado -->
         <li class="nav-item" *ngIf="!registred">
-          <button type="button" class="btn btn-login btn-outline-primary" routerLink="/login">Iniciar sesión</button>
+          <button type="button" class="btn btn-login btn-outline-primary" routerLink="/login">
+            Iniciar sesión
+          </button>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 <!-- End >> Navbar -->
-
