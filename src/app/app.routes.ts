@@ -77,6 +77,6 @@ export const routes: Routes = [
     component: AlbumComponent
   },
   {
-    path: '**', redirectTo: 'landing', pathMatch: 'full'
+    path: '**', redirectTo: '', pathMatch: 'full'
   }
 ];
