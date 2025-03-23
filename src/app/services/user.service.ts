@@ -28,9 +28,11 @@ export class UserService {
     return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}login`, userLogin)
       .pipe(
         tap(response => {
-          // Guarda el token en localStorage
-          localStorage.setItem("token", response.token);  // Suponiendo que el token está en response.token
-          console.log(localStorage.getItem("token"));     // Muestra el token guardado correctamente
+          localStorage.setItem("token", response.token);
+          const tokenParts = response.token.split('.');
+          if (tokenParts.length !== 3) {
+            console.error("Token mal formado:", response.token);
+          }
         })
       );
   }
