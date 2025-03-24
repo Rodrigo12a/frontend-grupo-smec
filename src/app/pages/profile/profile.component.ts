@@ -7,33 +7,29 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 interface DecodedToken {
-  // Especifica las propiedades conocidas como opcionales
-  nombre?: string;
-  nombre_usuario?: string;
-  apellidoP?: string;
-  ap_usuario?: string;
-  apellidoM?: string;
+  nombre_usuario: string;
+  ap_usuario: string;
   am_usuario?: string;
-  email?: string;
-  email_usuario?: string;
-  sexo_usuario?: number | string;
-  sexo?: number | string;
-  gender?: number | string;
-  [key: string]: any; // Firma de índice
+  email_usuario: string;
+  sexo_usuario: number | string;
+  // Agrega otras propiedades según tu token
 }
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [NavbarComponent,
+  imports: [
+    NavbarComponent,
     FooterComponent,
     ReactiveFormsModule,
-    CommonModule],
-  templateUrl: './profile.component.html',
+    CommonModule
+  ],
+  templateUrl: './profile.component.html', // Asegúrate que coincida con tu archivo
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
+  sexo_usuario: number = 0;
   avatarUrl: string = 'assets/images/avatars/avatar-01.svg';
 
   constructor(
@@ -59,45 +55,37 @@ export class ProfileComponent implements OnInit {
   private loadUserData(): void {
     const token = localStorage.getItem('token');
 
-    if (!token) {
-      this.router.navigate(['/login']);
-      return;
+    if (token) {
+      try {
+        const decoded: DecodedToken = jwtDecode(token);
+
+        // Actualizar avatar
+        this.sexo_usuario = Number(decoded.sexo_usuario);
+        this.avatarUrl = this.sexo_usuario === 0
+          ? 'assets/images/avatars/avatar-02.svg'
+          : 'assets/images/avatars/avatar-01.svg';
+
+        // Llenar formulario
+        this.profileForm.patchValue({
+          nombre_usuario: decoded.nombre_usuario,
+          ap_usuario: decoded.ap_usuario,
+          am_usuario: decoded.am_usuario || '',
+          email_usuario: decoded.email_usuario,
+          sexo_usuario: decoded.sexo_usuario.toString()
+        });
+
+      } catch (error) {
+        console.error('Error decodificando token:', error);
+        this.router.navigate(['/login']);
+      }
     }
-
-    try {
-      const decoded: DecodedToken = jwtDecode(token);
-      console.log('Token decodificado:', decoded); // Para depuración
-
-      // Manejo seguro de propiedades
-      const sexo = this.parseSexo(decoded);
-      this.avatarUrl = sexo === 0
-        ? 'assets/images/avatars/avatar-02.svg'
-        : 'assets/images/avatars/avatar-01.svg';
-
-      this.profileForm.patchValue({
-        nombre_usuario: decoded.nombre || decoded.nombre_usuario || '',
-        ap_usuario: decoded.apellidoP || decoded.ap_usuario || '',
-        am_usuario: decoded.apellidoM || decoded.am_usuario || '',
-        email_usuario: decoded.email || decoded.email_usuario || '',
-        sexo_usuario: sexo.toString()
-      });
-
-    } catch (error) {
-      console.error('Error decodificando token:', error);
-      localStorage.removeItem('token');
-      this.router.navigate(['/login']);
-    }
-  }
-
-  private parseSexo(decoded: DecodedToken): number {
-    const sexoValue = decoded.sexo_usuario ?? decoded.sexo ?? decoded.gender ?? 1;
-    return Number(sexoValue) || 1; // Valor por defecto: Masculino
   }
 
   updateProfile(): void {
     if (this.profileForm.valid) {
-      console.log('Datos a actualizar:', this.profileForm.value);
-      // Lógica para actualizar el perfil
+      // Aquí iría la lógica para actualizar el perfil
+      console.log('Datos actualizados:', this.profileForm.value);
+      alert('Perfil actualizado correctamente');
     }
   }
 
