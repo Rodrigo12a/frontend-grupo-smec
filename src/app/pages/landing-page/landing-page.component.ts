@@ -17,7 +17,7 @@ pdfUrl: SafeResourceUrl;
 
 
   constructor(private _usuarioService: UserService, private sanitizer: DomSanitizer){
-    this.pdfUrl = sanitizer.bypassSecurityTrustResourceUrl('/assets/recursos/catalogo-smec.pdf');
+    this.pdfUrl = sanitizer.bypassSecurityTrustResourceUrl('/assets/recursos/CATALOGO.pdf');
   }
 
   ngOnInit(): void{
