@@ -45,11 +45,11 @@ export class NavbarComponent implements OnInit {
         this.userRole = decoded.rol || 'Usuario' ; // Valor por defecto
       } catch (error) {
         console.error('Error decodificando token:', error);
-        this.logOut();
+        this.registred = false;
       }
     } else {
       console.error('Token inválido o no presente');
-      this.logOut();
+      this.registred = false;
     }
   }
 
