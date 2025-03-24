@@ -18,7 +18,6 @@
           </div>
         </div>
 
-
         <div class="table-responsive">
           <table *ngIf="listUsuarios.length > 0" class="table table-striped table-hover table-custom">
             <thead>
@@ -34,10 +33,19 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of listUsuarios">
-                <th>{{item.imagen_usuario}}</th>
+                <td>
+                  <img
+                    [src]="item.imagen_usuario || (item.sexo_usuario === 0 ?
+                    'assets/images/avatars/avatar-02.svg' :
+                    'assets/images/avatars/avatar-01.svg')"
+                    alt="Avatar de usuario"
+                    class="avatar-img"
+                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;"
+                  />
+                </td>
                 <td>{{item.nombre_usuario}}</td>
                 <td>{{item.ap_usuario}}</td>
-                <td>{{item.sexo_usuario}}</td>
+                <td>{{item.sexo_usuario === 0 ? 'Femenino' : 'Masculino'}}</td>
                 <td>{{item.email_usuario}}</td>
                 <td>{{item.estatus_usuario}}</td>
                 <td>
