@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { jwtDecode } from 'jwt-decode'; // Instala: npm install jwt-decode
+import { jwtDecode } from 'jwt-decode';
 
+// Corregido: agregar posibles variantes del nombre de la propiedad
 interface DecodedToken {
   nombre: string;
   apellidoP: string;
-  rol?: number; // id_rol: 745 o 125, por ejemplo
-  sexo_usuario: number; // 0 o 1
-  // Agrega otras propiedades según tu token
+  rol?: number;
+  sexo_usuario: number | string; // Permitir string
+  sexo?: number | string; // Versión alternativa del nombre
+  gender?: number | string; // Otra posible variante
 }
 
 @Component({
@@ -17,18 +19,18 @@ interface DecodedToken {
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink, // <-- Agrega esto
-    RouterLinkActive // <-- Y esto
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'] // Corregido (antes estaba en singular)
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   registred: boolean = false;
   userName: string = '';
   userRole: number = 0;
   id_rol: number = 0;
-  sexo_usuario: number = 0;
+  sexo_usuario: number = 0; // Siempre numérico
 
   constructor(private router: Router) {}
 
@@ -40,25 +42,42 @@ export class NavbarComponent implements OnInit {
     const token = localStorage.getItem('token');
     this.registred = !!token;
 
-    if (token && token.split('.').length === 3) { // Verifica que el token tenga 3 partes
+    if (token && token.split('.').length === 3) {
       try {
         const decoded: DecodedToken = jwtDecode(token);
+        console.log('Token decodificado:', decoded); // Para debug
+
+        // Corregido: manejar diferentes nombres y tipos
+        this.sexo_usuario = this.parseSexoUsuario(decoded);
+
         this.userName = `${decoded.nombre} ${decoded.apellidoP}`;
-        this.id_rol = decoded.rol ?? 0; // Si rol es undefined, asigna 0
-        this.sexo_usuario = decoded.sexo_usuario;
+        this.id_rol = decoded.rol ?? 0;
+
       } catch (error) {
         console.error('Error decodificando token:', error);
-        this.registred = false;
+        this.clearAuthState();
       }
     } else {
-      console.error('Token inválido o no presente');
-      this.registred = false;
+      this.clearAuthState();
     }
+  }
+
+  // Nuevo método para manejar la lógica de sexo_usuario
+  private parseSexoUsuario(decoded: DecodedToken): number {
+    const value = decoded.sexo_usuario ?? decoded.sexo ?? decoded.gender ?? 0;
+    return Number(value); // Convertir a número
+  }
+
+  private clearAuthState(): void {
+    this.registred = false;
+    this.sexo_usuario = 0;
+    this.id_rol = 0;
+    this.userName = '';
   }
 
   logOut(): void {
     localStorage.removeItem('token');
-    this.registred = false;
+    this.clearAuthState();
     this.router.navigate(['/']);
   }
 }
