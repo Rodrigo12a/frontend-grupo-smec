@@ -22,18 +22,20 @@
     </li>
   </ul>
 
-
-
   <hr>
   <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="assets/images/avatars/avatar-01.svg" alt="" width="32" height="32" class="rounded-circle me-2">
+          <img [src]="sexo_usuario === 0 ? 'assets/images/avatars/avatar-02.svg' : 'assets/images/avatars/avatar-01.svg'"
+               alt="Avatar usuario"
+               width="32"
+               height="32"
+               class="rounded-circle me-2">
           <strong>{{userName}}</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
           <li><a class="dropdown-item" routerLink="/profile">Mi perfil</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" routerLink="/login">Cerrar Sesión</a></li>
+          <li><a class="dropdown-item" (click)="logOut()">Cerrar Sesión</a></li>
       </ul>
   </div>
 </div>
