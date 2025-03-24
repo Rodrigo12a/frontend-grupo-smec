@@ -7,6 +7,7 @@ import {jwtDecode} from 'jwt-decode'; // Instala: npm install jwt-decode
 
 interface DecodedToken {
   nombre: string;
+  apellidoP: string;
   rol?: string;
   // Agrega otras propiedades según tu token
 }
@@ -40,8 +41,8 @@ export class NavbarComponent implements OnInit {
     if (token && token.split('.').length === 3) { // Verifica que el token tenga 3 partes
       try {
         const decoded: DecodedToken = jwtDecode(token);
-        this.userName = decoded.nombre;
-        this.userRole = decoded.rol || 'Usuario'; // Valor por defecto
+        this.userName = `${decoded.nombre} ${decoded.apellidoP}`;
+        this.userRole = decoded.rol || 'Usuario' ; // Valor por defecto
       } catch (error) {
         console.error('Error decodificando token:', error);
         this.logOut();
