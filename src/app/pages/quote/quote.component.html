@@ -3,34 +3,27 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <h2 class="text-center mb-4">Solicitar Cotización</h2>
-      <p class="text-muted text-center">Complete el siguiente formulario para solicitar una cotización de nuestros servicios. Nos pondremos en contacto con usted lo antes posible.</p>
+      <p class="text-muted text-center">
+        Complete el siguiente formulario para solicitar una cotización de nuestros servicios.
+        Nos pondremos en contacto con usted lo antes posible.
+      </p>
 
       <form [formGroup]="form" (ngSubmit)="addCotizacion()">
-        <div class="form-group">
-          <label>Tipo de cotización</label>
-          <select formControlName="tipo_cotizacion" class="form-control">
-            <option value="">Seleccione un tipo</option>
-            <option value="servicio">Servicio</option>
-            <option value="producto">Producto</option>
+        <div class="mb-3">
+          <label for="cotizacion" class="form-label">Tipo de Cotización</label>
+          <select formControlName="tipo_cotizacion" class="form-select" id="cotizacion" required>
+            <option value="" disabled selected>Seleccione una opción</option>
+            <!-- Se generan las opciones usando el arreglo de tipoCotizacionOptions -->
+            <option *ngFor="let option of tipoCotizacionOptions" [value]="option.id_tipo_cotizacion">
+              {{ option.nombre_cotizacion }}
+            </option>
           </select>
-          <div *ngIf="form.get('tipo_cotizacion')?.hasError('required') && form.get('tipo_cotizacion')?.touched"
-               class="error-message">
-            Campo requerido
-          </div>
         </div>
-
-        <div class="form-group">
-          <label>Mensaje adicional</label>
-          <textarea formControlName="mensaje_adicional" class="form-control"></textarea>
-          <div *ngIf="form.get('mensaje_adicional')?.hasError('required') && form.get('mensaje_adicional')?.touched"
-               class="error-message">
-            Campo requerido
-          </div>
+        <div class="mb-3">
+          <label for="mensaje-adicional" class="form-label">Mensaje Adicional</label>
+          <textarea formControlName="mensaje_adicional" class="form-control" id="mensaje-adicional" rows="3" placeholder="Ingrese detalles adicionales sobre su solicitud"></textarea>
         </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-          Crear Cotización
-        </button>
+        <button type="submit" class="btn btn-primary w-50 d-block mx-auto mb-4">Enviar</button>
       </form>
     </div>
   </div>

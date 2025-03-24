@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from "../../components/shared/navbar/navbar.component";
 import { FooterComponent } from "../../components/shared/footer/footer.component";
 import { UserService } from '../../services/landing.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,10 +12,12 @@ import { UserService } from '../../services/landing.service';
   styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent {
+  // En tu componente.ts
+pdfUrl: SafeResourceUrl;
 
 
-  constructor(private _usuarioService: UserService){
-
+  constructor(private _usuarioService: UserService, private sanitizer: DomSanitizer){
+    this.pdfUrl = sanitizer.bypassSecurityTrustResourceUrl('/assets/recursos/catalogo-smec.pdf');
   }
 
   ngOnInit(): void{
@@ -26,5 +29,6 @@ export class LandingPageComponent {
       console.log(data);
     })
   }
+
 
 }
