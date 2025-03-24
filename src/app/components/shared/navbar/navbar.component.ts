@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import {jwtDecode} from 'jwt-decode'; // Instala: npm install jwt-decode
-
+import { jwtDecode } from 'jwt-decode'; // Instala: npm install jwt-decode
 
 interface DecodedToken {
   nombre: string;
   apellidoP: string;
-  rol?: string;
+  rol?: number; // id_rol: 745 o 125, por ejemplo
+  sexo_usuario: number; // 0 o 1
   // Agrega otras propiedades según tu token
 }
 
@@ -17,16 +17,18 @@ interface DecodedToken {
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,      // <-- Agrega esto
+    RouterLink, // <-- Agrega esto
     RouterLinkActive // <-- Y esto
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.component.scss'] // Corregido (antes estaba en singular)
 })
 export class NavbarComponent implements OnInit {
-  registred: boolean = true;
+  registred: boolean = false;
   userName: string = '';
-  userRole: string = '';
+  userRole: number = 0;
+  id_rol: number = 0;
+  sexo_usuario: number = 0;
 
   constructor(private router: Router) {}
 
@@ -42,7 +44,8 @@ export class NavbarComponent implements OnInit {
       try {
         const decoded: DecodedToken = jwtDecode(token);
         this.userName = `${decoded.nombre} ${decoded.apellidoP}`;
-        this.userRole = decoded.rol || 'Usuario' ; // Valor por defecto
+        this.id_rol = decoded.rol ?? 0; // Si rol es undefined, asigna 0
+        this.sexo_usuario = decoded.sexo_usuario;
       } catch (error) {
         console.error('Error decodificando token:', error);
         this.registred = false;
@@ -52,7 +55,6 @@ export class NavbarComponent implements OnInit {
       this.registred = false;
     }
   }
-
 
   logOut(): void {
     localStorage.removeItem('token');

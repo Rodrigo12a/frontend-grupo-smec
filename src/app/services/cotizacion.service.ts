@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; 
+import { HttpClient } from '@angular/common/http';
 import { enviroment } from '../enviroments/enviroment';
 import { Cotizacion } from '../interfaces/contizacion';
 import { Observable } from 'rxjs';
@@ -20,3 +20,4 @@ export class CotizacionService {
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}`, cotizacion);
   }
 }
+//mysql://root:gMimNidewoBuTtAyDodFxEIRQMfhKFwr@shinkansen.proxy.rlwy.net:25181/railway
