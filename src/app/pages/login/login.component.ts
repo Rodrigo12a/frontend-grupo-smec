@@ -51,7 +51,8 @@ export class LoginComponent {
     this.loading = true;
     this._userService.Login(userLogin).subscribe({
       next: (token) => {
-        localStorage.setItem('token', token);
+        console.log(token);
+
         this.router.navigate(['/user'])
       },
       error: (e: HttpErrorResponse) => {
