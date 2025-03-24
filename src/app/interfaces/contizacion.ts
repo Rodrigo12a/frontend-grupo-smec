@@ -6,7 +6,7 @@ export interface Cotizacion {
   //id_cotizacion?: number;
   mensaje_adicional: string | null;
   tipo_cotizacion: string;
-  //id_usuario: number;
+  id_usuario: number;
 
   /* Campos relacionales opcionales (si necesitas incluir datos relacionados)
   tipo_cotizacion?: TipoCotizacion;  // Si tienes esta interfaz
