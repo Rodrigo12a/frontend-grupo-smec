@@ -14,7 +14,7 @@ interface DecodedToken {
 
 @Component({
   selector: 'app-navbar',
-  standalone: true, // <-- Si es standalone
+  standalone: true,
   imports: [
     CommonModule,
     RouterLink,      // <-- Agrega esto
