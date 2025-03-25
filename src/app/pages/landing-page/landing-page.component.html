@@ -15,7 +15,7 @@
                           </div>
 
                           <div>
-                              <a routerLink="/quote" class="btn btn-primary shadow">Solicitar Cotización</a>
+                              <button type="button" class="btn btn-primary shadow"   (click)="navigateToQuote()">Solicitar Cotización</button>
                               <a [href]="pdfUrl" download="Catalogo-SMEC.pdf" class="btn btn-outline-primary ms-5">
                                 Descargar Catálogo
                               </a>

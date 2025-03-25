@@ -3,6 +3,7 @@ import { NavbarComponent } from "../../components/shared/navbar/navbar.component
 import { FooterComponent } from "../../components/shared/footer/footer.component";
 import { UserService } from '../../services/landing.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,7 +17,7 @@ export class LandingPageComponent {
 pdfUrl: SafeResourceUrl;
 
 
-  constructor(private _usuarioService: UserService, private sanitizer: DomSanitizer){
+  constructor(private _usuarioService: UserService, private sanitizer: DomSanitizer, private router: Router){
     this.pdfUrl = sanitizer.bypassSecurityTrustResourceUrl('/assets/recursos/CATALOGO.pdf');
   }
 
@@ -28,6 +29,10 @@ pdfUrl: SafeResourceUrl;
     this._usuarioService.getUsuarios().subscribe(data => {
       console.log(data);
     })
+  }
+
+  navigateToQuote(){
+    this.router.navigate(['/quote']);
   }
 
 
