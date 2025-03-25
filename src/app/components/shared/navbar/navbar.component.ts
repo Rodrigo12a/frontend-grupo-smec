@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
+// Corregido: agregar posibles variantes del nombre de la propiedad
 interface DecodedToken {
-  id: number;
-  email: string;
   nombre: string;
   apellidoP: string;
-  apellidoM?: string;
-  rol: number;
-  sexo: number;
+  rol?: number;
+  sexo_usuario: number | string; // Permitir string
+  sexo?: number | string; // Versión alternativa del nombre
+  gender?: number | string; // Otra posible variante
 }
 
 @Component({
@@ -26,67 +26,53 @@ interface DecodedToken {
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isAuthenticated: boolean = false;
+  registred: boolean = false;
   userName: string = '';
-  userEmail: string = '';
   userRole: number = 0;
-  userGender: number = 0;
+  id_rol: number = 0;
+  sexo_usuario: number = 0; // Siempre numérico
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.checkAuthState();
-    // Escuchar cambios en localStorage
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'token') {
-        this.checkAuthState();
-      }
-    });
   }
 
   private checkAuthState(): void {
     const token = localStorage.getItem('token');
+    this.registred = !!token;
 
-    if (!token) {
-      this.clearAuthState();
-      return;
-    }
+    if (token && token.split('.').length === 3) {
+      try {
+        const decoded: DecodedToken = jwtDecode(token);
+        console.log('Token decodificado:', decoded); // Para debug
 
-    // Verificar formato básico del token JWT
-    const tokenParts = token.split('.');
-    if (tokenParts.length !== 3) {
-      console.error('Formato de token inválido');
-      this.clearAuthState();
-      return;
-    }
+        // Corregido: manejar diferentes nombres y tipos
+        this.sexo_usuario = this.parseSexoUsuario(decoded);
 
-    try {
-      const decoded: DecodedToken = jwtDecode(token);
+        this.userName = `${decoded.nombre} ${decoded.apellidoP}`;
+        this.id_rol = decoded.rol ?? 0;
 
-      // Validar estructura mínima del token decodificado
-      if (!decoded.id || !decoded.email || !decoded.nombre) {
-        throw new Error('Token no contiene los campos requeridos');
+      } catch (error) {
+        console.error('Error decodificando token:', error);
+        this.clearAuthState();
       }
-
-      this.isAuthenticated = true;
-      this.userName = `${decoded.nombre} ${decoded.apellidoP}`;
-      this.userEmail = decoded.email;
-      this.userRole = decoded.rol || 0;
-      this.userGender = decoded.sexo || 0;
-
-    } catch (error) {
-      console.error('Error al decodificar el token:', error);
+    } else {
       this.clearAuthState();
-      localStorage.removeItem('token'); // Limpiar token inválido
     }
   }
 
+  // Nuevo método para manejar la lógica de sexo_usuario
+  private parseSexoUsuario(decoded: DecodedToken): number {
+    const value = decoded.sexo_usuario ?? decoded.sexo ?? decoded.gender ?? 0;
+    return Number(value); // Convertir a número
+  }
+
   private clearAuthState(): void {
-    this.isAuthenticated = false;
+    this.registred = false;
+    this.sexo_usuario = 0;
+    this.id_rol = 0;
     this.userName = '';
-    this.userEmail = '';
-    this.userRole = 0;
-    this.userGender = 0;
   }
 
   logOut(): void {

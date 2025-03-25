@@ -44,16 +44,16 @@
           </div>
         </li>
 
-        <!-- Usuario registrado -->
-        <li class="nav-item dropdown" *ngIf="isAuthenticated">
+        <!-- Registred -->
+        <li class="nav-item dropdown" *ngIf="registred">
           <a class="img-user" href="#" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img [src]="userGender === 0 ? 'assets/images/avatars/avatar-02.svg' : 'assets/images/avatars/avatar-01.svg'"
+            <img [src]="sexo_usuario === 0 ? 'assets/images/avatars/avatar-02.svg' : 'assets/images/avatars/avatar-01.svg'"
                  class="user user-chip-md bg-default" alt="user-image">
           </a>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink2">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
             <div class="row p-2 d-flex align-items-center" style="width: 20rem;">
               <div class="col-md-3 col-sm-3 col-3">
-                <img [src]="userGender === 0 ? 'assets/images/avatars/avatar-02.svg' : 'assets/images/avatars/avatar-01.svg'"
+                <img [src]="sexo_usuario === 0 ? 'assets/images/avatars/avatar-02.svg' : 'assets/images/avatars/avatar-01.svg'"
                      class="user user-chip-xxlg bg-default" alt="user-image">
               </div>
               <div class="col-md-9 col-sm-9 col-9">
@@ -62,8 +62,8 @@
                     <h6 class="text-dark p-0 m-0 text-capitalize"><strong>{{ userName }}</strong></h6>
                   </div>
                   <div>
-                    <small class="text-muted text-capitalize">
-                      {{ userEmail }}
+                    <small class="text-dark text-capitalize">
+                      {{ id_rol === 745 ? 'Administrador' : id_rol === 125 ? 'Usuario' : 'Rol desconocido' }}
                     </small>
                   </div>
                 </div>
@@ -74,7 +74,7 @@
                 <i class="bi bi-person-circle fs-5 text-primary"></i>
                 <span class="ms-4">Mi Perfil</span>
               </li>
-              <li class="list-group-item-user icon-center" *ngIf="userRole === 1" routerLink="/user">
+              <li class="list-group-item-user icon-center" routerLink="/user">
                 <i class="bi bi-bar-chart-line-fill fs-5 text-info"></i>
                 <span class="ms-4">Panel Administrativo</span>
               </li>
@@ -86,8 +86,8 @@
           </div>
         </li>
 
-        <!-- Usuario no registrado -->
-        <li class="nav-item" *ngIf="!isAuthenticated">
+        <!-- Not registred -->
+        <li class="nav-item" *ngIf="!registred">
           <button type="button" class="btn btn-login btn-outline-primary" routerLink="/login">Iniciar sesión</button>
         </li>
       </ul>
