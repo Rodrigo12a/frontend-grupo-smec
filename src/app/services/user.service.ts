@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { usuario } from '../interfaces/usuario';
 import { Observable } from 'rxjs';
 import { Login } from '../interfaces/login';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 
 
@@ -24,18 +24,18 @@ export class UserService {
       return this.http.post(`${this.myAppUrl}${this.myApiUrl}`, usuario);
    }
 
-   Login(userLogin: Login): Observable<any> {
-    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}login`, userLogin)
+   Login(userLogin: Login): Observable<string> {  // Cambia any por string
+    return this.http.post<{token: string}>(`${this.myAppUrl}${this.myApiUrl}login`, userLogin)
       .pipe(
-        tap(response => {
-          localStorage.setItem("token", response.token);
-          const tokenParts = response.token.split('.');
+        map(response => response.token),  // Extrae solo el token
+        tap(token => {
+          const tokenParts = token.split('.');
           if (tokenParts.length !== 3) {
-            console.error("Token mal formado:", response.token);
+            console.error("Token mal formado:", token);
+            throw new Error('Token inválido');
           }
         })
       );
+}
   }
 
-
-}
