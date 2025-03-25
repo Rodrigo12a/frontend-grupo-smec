@@ -34,6 +34,9 @@ pdfUrl: SafeResourceUrl;
   navigateToQuote(){
     this.router.navigate(['/quote']);
   }
+  navigateToAboutUs(){
+    this.router.navigate(['/about-us']);
+  }
 
 
 }
