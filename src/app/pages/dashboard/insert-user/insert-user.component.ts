@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './insert-user.component.scss'
 })
 export class InsertUserComponent {
-
+  
   form: FormGroup;
   loading: boolean = false;
   id: number;
