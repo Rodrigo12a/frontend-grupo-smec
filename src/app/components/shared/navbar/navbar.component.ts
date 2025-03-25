@@ -4,15 +4,14 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
-// Interface para decodificar el token, considerando variantes de nombres de propiedades
+// Corregido: agregar posibles variantes del nombre de la propiedad
 interface DecodedToken {
   nombre: string;
   apellidoP: string;
-  id: number;
   rol?: number;
   sexo_usuario: number | string; // Permitir string
-  sexo?: number | string;        // Versión alternativa
-  gender?: number | string;      // Otra posible variante
+  sexo?: number | string; // Versión alternativa del nombre
+  gender?: number | string; // Otra posible variante
 }
 
 @Component({
@@ -37,7 +36,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAuthState();
-    this.redirectUser();
   }
 
   private checkAuthState(): void {
@@ -47,16 +45,14 @@ export class NavbarComponent implements OnInit {
     if (token && token.split('.').length === 3) {
       try {
         const decoded: DecodedToken = jwtDecode(token);
-        console.log('Token decodificado:', decoded);
+        console.log('Token decodificado:', decoded); // Para debug
 
-        // Manejo de las variantes y conversión del sexo a número
+        // Corregido: manejar diferentes nombres y tipos
         this.sexo_usuario = this.parseSexoUsuario(decoded);
-        this.userName = decoded.nombre && decoded.apellidoP
-                        ? `${decoded.nombre} ${decoded.apellidoP}`
-                        : 'Usuario';
+
+        this.userName = `${decoded.nombre} ${decoded.apellidoP}`;
         this.id_rol = decoded.rol ?? 0;
 
-        this.registred = true;
       } catch (error) {
         console.error('Error decodificando token:', error);
         this.clearAuthState();
@@ -66,29 +62,17 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // Maneja las variantes de la propiedad para el sexo y lo convierte a número
+  // Nuevo método para manejar la lógica de sexo_usuario
   private parseSexoUsuario(decoded: DecodedToken): number {
     const value = decoded.sexo_usuario ?? decoded.sexo ?? decoded.gender ?? 0;
-    return Number(value);
+    return Number(value); // Convertir a número
   }
 
-  // Limpia el estado de autenticación
   private clearAuthState(): void {
     this.registred = false;
     this.sexo_usuario = 0;
     this.id_rol = 0;
     this.userName = '';
-  }
-
-  // Redirige al usuario según su rol: 745 a /user y 125 a /
-  private redirectUser(): void {
-    if (this.registred) {
-      if (this.id_rol === 745) {
-        this.router.navigate(['/user']);
-      } else if (this.id_rol === 125) {
-        this.router.navigate(['/']);
-      }
-    }
   }
 
   logOut(): void {
