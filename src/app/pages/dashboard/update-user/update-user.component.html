@@ -1,6 +1,6 @@
 <main class="d-flex">
   <!-- Sidebar como elemento fijo -->
- <app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
 
   <!-- Contenido principal -->
   <div class="container-fluid flex-grow-1" style="margin-left: 280px;">
@@ -9,7 +9,7 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2 mb-0" style="color: var(--color-primary);">Usuarios</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
-            <!-- Botones sin cambios -->
+            <!-- Botones adicionales si son necesarios -->
           </div>
         </div>
         <div class="row">
@@ -37,7 +37,7 @@
                   </div>
                 </div>
                 <hr>
-                <button class="btn btn-primary w-100 mb-2">
+                <button class="btn btn-primary w-100 mb-2" (click)="logOut()">
                   <i class="bi bi-box-arrow-left me-2"></i>Cerrar Sesión
                 </button>
               </div>
@@ -49,54 +49,50 @@
             <div class="card shadow-sm">
               <div class="card-body">
                 <h5 class="card-title mb-4">Información Personal</h5>
-
-                <form>
+                <form [formGroup]="updateForm" (ngSubmit)="updateUser()">
                   <div class="row g-3">
                     <div class="col-md-6">
                       <label class="form-label">Nombre completo</label>
-                      <input type="text"
-                             class="form-control"
-                             value="Juan Tzompantzi">
+                      <input formControlName="nombre"
+                             type="text"
+                             class="form-control">
                     </div>
-
                     <div class="col-md-6">
                       <label class="form-label">Correo electrónico</label>
-                      <input type="email"
-                             class="form-control"
-                             value="juan@example.com">
+                      <input formControlName="email"
+                             type="email"
+                             class="form-control">
                     </div>
-
                     <div class="col-md-6">
                       <label class="form-label">Teléfono</label>
-                      <input type="tel"
-                             class="form-control"
-                             value="+52 55 1234 5678">
+                      <input formControlName="telefono"
+                             type="tel"
+                             class="form-control">
                     </div>
-
                     <div class="col-md-6">
                       <label class="form-label">Ubicación</label>
-                      <input type="text"
-                             class="form-control"
-                             value="Ciudad de México">
+                      <input formControlName="ubicacion"
+                             type="text"
+                             class="form-control">
                     </div>
-
+                    <div class="col-md-6">
+                      <label class="form-label">Apellido Paterno</label>
+                      <input formControlName="apellidoP"
+                             type="text"
+                             class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Apellido Materno</label>
+                      <input formControlName="apellidoM"
+                             type="text"
+                             class="form-control">
+                    </div>
                     <div class="col-12">
                       <label class="form-label">Biografía</label>
-                      <textarea class="form-control" rows="3">Desarrollador fullstack apasionado por crear soluciones innovadoras.</textarea>
+                      <textarea formControlName="biografia"
+                                class="form-control"
+                                rows="3"></textarea>
                     </div>
-
-                    <div class="col-12">
-                      <hr class="my-4">
-                      <h6 class="mb-3">Seguridad</h6>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <span>Contraseña</span>
-                        <button type="button"
-                                class="btn btn-outline-secondary btn-sm">
-                          Cambiar contraseña
-                        </button>
-                      </div>
-                    </div>
-
                     <div class="col-12 text-end mt-4">
                       <button type="submit"
                               class="btn btn-primary">
@@ -108,10 +104,9 @@
               </div>
             </div>
           </div>
+          <!-- Fin Columna derecha -->
         </div>
-
       </div>
     </div>
   </div>
 </main>
-
