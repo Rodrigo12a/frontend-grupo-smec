@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Login } from '../../interfaces/login';
 import { UserService } from '../../services/user.service';
@@ -13,6 +13,8 @@ import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
   id_rol: number;
+  nombre_usuario: string; // Añadido para el nombre
+  email: string;
 }
 
 @Component({
@@ -22,7 +24,7 @@ interface DecodedToken {
     RouterModule,
     FormsModule,
     SpinnerComponent
-],
+  ],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -32,18 +34,15 @@ export class LoginComponent {
   password_usuario: string = '';
   loading: boolean = false;
 
-
-  constructor(private router: Router, private toastr: ToastrService,
-    private _userService: UserService, private _errorService: ErrorService
+  constructor(
+    private router: Router,
+    private toastr: ToastrService,
+    private _userService: UserService,
+    private _errorService: ErrorService
   ) {}
-  navigateToHome() {
-    this.router.navigate(['/']); // Navega a la ruta /home
-  }
-  navigateToRegister() {
-    this.router.navigate(['/register']); // Navega a la ruta /home
-  }
+
   login() {
-    if(this.email_usuario === '' || this.password_usuario === '') {
+    if (this.email_usuario === '' || this.password_usuario === '') {
       this.toastr.error('Todos los campos son obligatorios', 'Error');
       return;
     }
@@ -57,7 +56,6 @@ export class LoginComponent {
     this._userService.Login(userLogin).subscribe({
       next: (token) => {
         try {
-          // Verifica que el token sea un string válido
           if (typeof token !== 'string' || token.split('.').length !== 3) {
             throw new Error('Token inválido');
           }
@@ -65,13 +63,21 @@ export class LoginComponent {
           localStorage.setItem('token', token);
           const decoded = jwtDecode<DecodedToken>(token);
 
-          if (decoded.id_rol === 745) {
-            this.router.navigate(['/user']);
-          } else if (decoded.id_rol === 125) {
-            this.router.navigate(['/']);
-          } else {
-            this.router.navigate(['/']);
-            this.toastr.warning('Rol de usuario no reconocido');
+          // Mensaje de bienvenida personalizado
+          const nombreUsuario = decoded.nombre_usuario || 'Usuario';
+          this.toastr.success(`¡Bienvenido ${nombreUsuario}!`, 'Inicio de sesión exitoso');
+
+          // Redirección basada en el rol
+          switch (decoded.id_rol) {
+            case 745:
+              this.router.navigate(['/user']);
+              break;
+            case 125:
+              this.router.navigate(['/']);
+              break;
+            default:
+              this.router.navigate(['/']);
+              // No mostramos advertencia si el rol no es crítico
           }
         } catch (error) {
           console.error('Error con el token:', error);
@@ -87,7 +93,13 @@ export class LoginComponent {
         this.loading = false;
       }
     });
-}
+  }
 
+  navigateToHome() {
+    this.router.navigate(['/']);
+  }
 
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
 }
