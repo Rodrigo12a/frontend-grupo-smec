@@ -37,8 +37,12 @@ export class UserService {
         })
       );
 }
+getUserById(userId: number): Observable<any> {
+  return this.http.get(`${this.myAppUrl}${this.myApiUrl}${userId}`);
+}
 updateUser(userId: number, updatedData: Partial<usuario>): Observable<any> {
   return this.http.put(`${this.myAppUrl}${this.myApiUrl}${userId}`, updatedData);
 }
+
   }
 
