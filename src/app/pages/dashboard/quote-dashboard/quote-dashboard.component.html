@@ -1,96 +1,21 @@
-<div class="container mt-4">
-  <div class="row">
-    <!-- Cotizaciones pendientes -->
-    <div class="col-12 col-md-6 mb-4">
-      <div class="card">
-        <div class="card-header bg-warning text-dark">
-          <h5 class="mb-0"><i class="bi bi-exclamation-triangle-fill"></i> Pendientes de responder</h5>
-        </div>
-        <div class="card-body p-0">
-          <ul class="list-group list-group-flush" id="pendientes-list">
-            <li class="list-group-item" *ngFor="let quote of pendingQuotes">
-              <div class="d-flex align-items-start">
-                <img [src]="quote.image"
-                     class="rounded-circle me-3"
-                     alt="Imagen usuario">
-                <div class="flex-grow-1">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h6 class="mb-1">{{ quote.name }}</h6>
-                    <small class="text-muted">{{ quote.time }}</small>
-                  </div>
-                  <p class="mb-1">
-                    <span *ngFor="let badge of quote.badges"
-                          class="badge ms-1"
-                          [ngClass]="'bg-' + badge.type">
-                      {{ badge.text }}
-                    </span>
-                  </p>
-                  <p class="text-muted mb-0">
-                    "{{ quote.message }}"
-                  </p>
-                  <div class="mt-2 d-flex justify-content-end gap-1">
-                    <button class="btn btn-success btn-sm" (click)="moveToResponded(quote.id)">
-                      <i class="bi bi-check-circle"></i> Listo
-                    </button>
-                    <button class="btn btn-danger btn-sm" (click)="deleteQuote(quote.id, 'pending')">
-                      <i class="bi bi-trash"></i> Eliminar
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+<main class="d-flex">
+  <!-- Sidebar como elemento fijo -->
+  <app-sidebar></app-sidebar> <!-- Mover fuera del grid -->
 
-    <!-- Cotizaciones respondidas -->
-    <div class="col-12 col-md-6 mb-4">
-      <div class="card">
-        <div class="card-header bg-success text-white">
-          <h5 class="mb-0"><i class="bi bi-check-circle-fill"></i> Respondidas</h5>
+  <!-- Contenido principal -->
+  <div class="container-fluid flex-grow-1" style="margin-left: 280px;">
+    <div class="row">
+      <div class="col-12 px-4"> <!-- Contenido ajustado -->
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2 mb-0">Cotizaciones</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <!-- Botones sin cambios -->
+          </div>
         </div>
-        <div class="card-body p-0">
-          <ul class="list-group list-group-flush" id="respondidas-list">
-            <li class="list-group-item bg-light" *ngFor="let quote of respondedQuotes">
-              <div class="d-flex align-items-start">
-                <img [src]="quote.image"
-                     class="rounded-circle me-3"
-                     alt="Imagen usuario">
-                <div class="flex-grow-1">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h6 class="mb-1">{{ quote.name }}</h6>
-                    <small class="text-muted">{{ quote.time }}</small>
-                  </div>
-                  <p class="mb-1">
-                    <span *ngFor="let badge of quote.badges"
-                          class="badge ms-1"
-                          [ngClass]="'bg-' + badge.type">
-                      {{ badge.text }}
-                    </span>
-                  </p>
-                  <p class="text-muted mb-0">
-                    "{{ quote.message }}"
-                  </p>
-                  <div class="mt-2 d-flex justify-content-between align-items-center">
-                    <div class="text-success">
-                      <i class="bi bi-check2-all"></i> Respondida el {{ quote.dateResponded | date:'dd/MM/yyyy' }}
-                    </div>
-                    <div class="d-flex gap-1">
-                      <button class="btn btn-outline-secondary btn-sm" (click)="moveToPending(quote.id)">
-                        <i class="bi bi-arrow-counterclockwise"></i> Deshacer
-                      </button>
-                      <button class="btn btn-danger btn-sm" (click)="deleteQuote(quote.id, 'responded')">
-                        <i class="bi bi-trash"></i> Eliminar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+
+        <!-- Resto del contenido sin cambios -->
+        <app-cotizaciones></app-cotizaciones>
       </div>
     </div>
   </div>
-</div>
+</main>

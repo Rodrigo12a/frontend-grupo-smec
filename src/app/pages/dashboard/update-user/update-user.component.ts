@@ -1,19 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "../../../components/shared/sidebar/sidebar.component";
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../services/user.service';
+
+interface DecodedToken {
+  id: number;
+  nombre: string;
+  apellidoP: string;
+  apellidoM?: string;
+  email: string;
+  telefono?: string;
+  ubicacion?: string;
+  biografia?: string;
+  sexo?: number | string;
+  // Agrega otras propiedades según sea necesario
+}
 
 @Component({
   selector: 'app-update-user',
   standalone: true,
-  imports: [
-    CommonModule,
-    SidebarComponent,
-    ReactiveFormsModule
-  ],
+  imports: [SidebarComponent, ReactiveFormsModule],
   templateUrl: './update-user.component.html',
   styleUrl: './update-user.component.scss'
 })
@@ -25,22 +34,20 @@ export class UpdateUserComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private toastr: ToastrService,
-    private route: ActivatedRoute
-  ) {
-    this.initializeForm();
-  }
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
+    this.initializeForm();
     this.loadUserData();
   }
 
   private initializeForm(): void {
     this.updateForm = this.fb.group({
-      nombre_usuario: ['', [Validators.required, Validators.minLength(2)]],
-      ap_usuario: ['', [Validators.required, Validators.minLength(2)]],
-      am_usuario: [''],
-      email_usuario: ['', [Validators.required, Validators.email]],
+      nombre: ['', Validators.required],
+      apellidoP: ['', Validators.required],
+      apellidoM: [''],
+      email: ['', [Validators.required, Validators.email]],
       telefono: [''],
       ubicacion: [''],
       biografia: ['']
@@ -48,77 +55,51 @@ export class UpdateUserComponent implements OnInit {
   }
 
   private loadUserData(): void {
-    this.route.params.subscribe(params => {
-      this.userId = +params['id'];
-
-      if (this.userId) {
-        this.userService.getUserById(this.userId).subscribe({
-          next: (response) => {
-            const user = response.usuario || response;
-
-            this.updateForm.patchValue({
-              nombre_usuario: user.nombre_usuario || '',
-              ap_usuario: user.ap_usuario || '',
-              am_usuario: user.am_usuario || '',
-              email_usuario: user.email_usuario || '',
-              telefono: user.telefono || '',
-              ubicacion: user.ubicacion || '',
-              biografia: user.biografia || ''
-            });
-          },
-          error: (error) => {
-            console.error('Error al cargar datos de usuario:', error);
-            this.toastr.error('No se pudieron cargar los datos del usuario');
-            this.router.navigate(['/usuarios']);
-          }
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded: DecodedToken = jwtDecode(token);
+        this.userId = decoded.id;
+        // Actualiza el formulario con los datos decodificados
+        this.updateForm.patchValue({
+          nombre: decoded.nombre,
+          apellidoP: decoded.apellidoP,
+          apellidoM: decoded.apellidoM || '',
+          email: decoded.email,
+          telefono: decoded.telefono || '',
+          ubicacion: decoded.ubicacion || '',
+          biografia: decoded.biografia || ''
         });
+      } catch (error) {
+        console.error('Error decodificando token:', error);
+        this.router.navigate(['/login']);
       }
-    });
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   updateUser(): void {
-    if (this.updateForm.invalid || !this.userId) {
-      this.toastr.error('Por favor, completa los campos requeridos correctamente');
+    if (this.updateForm.invalid || this.userId === null) {
+      this.toastr.error('Por favor, corrige los errores en el formulario');
       return;
     }
-
-    const updatedUser = this.updateForm.value;
-
+    const updatedUser = { ...this.updateForm.value };
+    this.userService.updateUser
     this.userService.updateUser(this.userId, updatedUser).subscribe({
       next: (response) => {
         this.toastr.success('Usuario actualizado correctamente');
-        this.router.navigate(['/usuarios']);
+        // Opcional: redirigir o refrescar datos
       },
       error: (error) => {
-        console.error('Error al actualizar:', error);
-        this.toastr.error(error.error?.message || 'Error al actualizar usuario');
+        console.error('Error al actualizar usuario:', error);
+        this.toastr.error('Error al actualizar el usuario');
       }
     });
   }
 
-  // Métodos para manejar validaciones en el template
-  isFieldInvalid(controlName: string): boolean {
-    const control = this.updateForm.get(controlName);
-    return !!(control && control.invalid && (control.dirty || control.touched));
-  }
-
-  getErrorMessage(controlName: string): string {
-    const control = this.updateForm.get(controlName);
-    if (control?.errors) {
-      if (control.errors['required']) {
-        return 'Este campo es requerido';
-      }
-      if (control.errors['email']) {
-        return 'Ingrese un email válido';
-      }
-      if (control.errors['minlength']) {
-        return 'El campo es demasiado corto';
-      }
-    }
-    return '';
-  }
-
-  cancelar(): void {
-    this.router.navigate(['/usuarios']);
+  logOut(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
