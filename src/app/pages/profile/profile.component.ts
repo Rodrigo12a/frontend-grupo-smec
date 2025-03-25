@@ -12,7 +12,7 @@ interface DecodedToken {
   am_usuario?: string;
   email_usuario: string;
   sexo_usuario: number | string;
-  // Agrega otras propiedades según tu token
+  // Otras propiedades del token, si las hay
 }
 
 @Component({
@@ -24,7 +24,7 @@ interface DecodedToken {
     ReactiveFormsModule,
     CommonModule
   ],
-  templateUrl: './profile.component.html', // Asegúrate que coincida con tu archivo
+  templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
@@ -58,22 +58,26 @@ export class ProfileComponent implements OnInit {
     if (token) {
       try {
         const decoded: DecodedToken = jwtDecode(token);
+        console.log('Decoded token:', decoded);
 
-        // Actualizar avatar
-        this.sexo_usuario = Number(decoded.sexo_usuario);
+        // Verificar y asignar un valor predeterminado si sexo_usuario es undefined o null
+        const sexoValue = (decoded.sexo_usuario !== undefined && decoded.sexo_usuario !== null)
+          ? decoded.sexo_usuario.toString()
+          : '0';
+
+        this.sexo_usuario = Number(sexoValue);
         this.avatarUrl = this.sexo_usuario === 0
           ? 'assets/images/avatars/avatar-02.svg'
           : 'assets/images/avatars/avatar-01.svg';
 
-        // Llenar formulario
+        // Llenar formulario con los datos decodificados
         this.profileForm.patchValue({
           nombre_usuario: decoded.nombre_usuario,
           ap_usuario: decoded.ap_usuario,
           am_usuario: decoded.am_usuario || '',
           email_usuario: decoded.email_usuario,
-          sexo_usuario: decoded.sexo_usuario.toString()
+          sexo_usuario: sexoValue
         });
-
       } catch (error) {
         console.error('Error decodificando token:', error);
         this.router.navigate(['/login']);
