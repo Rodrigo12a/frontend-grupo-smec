@@ -68,7 +68,7 @@ export class QuoteComponent {
     }
 
     const cotizacion: Cotizacion = {
-      id_tipo_cotizacion: this.form.value.tipo_cotizacion,
+      id_tipo_cotizacion: this.form.value.id_tipo_cotizacion,
       mensaje_adicional: this.form.value.mensaje_adicional,
       id_usuario: userId
     };
