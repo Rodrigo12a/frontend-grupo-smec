@@ -6,6 +6,7 @@ import { Cotizacion } from '../../interfaces/contizacion';
 import {jwtDecode} from 'jwt-decode';
 import { CotizacionService } from '../../services/cotizacion.service';
 import { ToastrService } from 'ngx-toastr'; // Importar Toastr
+import { CommonModule } from '@angular/common';
 
 interface DecodedToken {
   id: number;
@@ -17,7 +18,7 @@ interface TipoCotizacion {
 
 @Component({
   selector: 'app-quote',
-  imports: [NavbarComponent, FooterComponent, ReactiveFormsModule],
+  imports: [NavbarComponent, FooterComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './quote.component.html',
   styleUrl: './quote.component.scss'
 })
@@ -39,7 +40,7 @@ export class QuoteComponent {
   ) {
     this.form = this.fb.group({
       tipo_cotizacion: ['', [Validators.required]],
-      mensaje_adicional: ['', Validators.required]
+      mensaje_adicional: ['', Validators.required],
     });
   }
 

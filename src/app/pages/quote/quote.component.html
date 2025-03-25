@@ -14,7 +14,7 @@
           <select formControlName="tipo_cotizacion" class="form-select" id="cotizacion" required>
             <option value="" disabled selected>Seleccione una opción</option>
             <!-- Se generan las opciones usando el arreglo de tipoCotizacionOptions -->
-            <option *ngFor="let option of tipoCotizacionOptions" [value]="option.id_tipo_cotizacion">
+            <option *ngFor="let option of [{id_tipo_cotizacion:1, nombre_cotizacion:'Test'}]" [value]="option.id_tipo_cotizacion">
               {{ option.nombre_cotizacion }}
             </option>
           </select>
