@@ -1,91 +1,192 @@
-<main class="d-flex">
-  <app-sidebar></app-sidebar>
-
-  <div class="container-fluid flex-grow-1" style="margin-left: 280px;">
-    <div class="row">
-      <div class="col-12 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2 mb-0" style="color: var(--color-primary);">Editar Usuario</h1>
+<div class="container mt-4">
+  <div class="row">
+    <!-- Cotizaciones pendientes -->
+    <div class="col-12 col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header bg-warning text-dark">
+          <h5 class="mb-0"><i class="bi bi-exclamation-triangle-fill"></i> Pendientes de responder</h5>
         </div>
-        <div class="row">
-          <!-- Columna izquierda -->
-          <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-              <div class="card-body text-center">
-                <!-- ... (mismo contenido de avatar) ... -->
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush" id="pendientes-list">
+            <!-- Item de cotización -->
+            <li class="list-group-item">
+              <div class="d-flex align-items-start">
+                <img src="https://via.placeholder.com/50"
+                     class="rounded-circle me-3"
+                     alt="Imagen usuario">
+                <div class="flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="mb-1">Juan Pérez García</h6>
+                    <small class="text-muted">hace 2 horas</small>
+                  </div>
+                  <p class="mb-1">
+                    <span class="badge bg-primary">Cotización eléctrica</span>
+                    <span class="badge bg-secondary ms-1">Urgente</span>
+                  </p>
+                  <p class="text-muted mb-0">
+                    "Necesito instalación completa en local de 200m² con certificado"
+                  </p>
+                  <div class="mt-2 d-flex justify-content-end gap-1">
+                    <button class="btn btn-success btn-sm btn-listo">
+                      <i class="bi bi-check-circle"></i> Listo
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-eliminar">
+                      <i class="bi bi-trash"></i> Eliminar
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </li>
 
-          <!-- Columna derecha -->
-          <div class="col-md-8">
-            <div class="card shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title mb-4">Información Personal</h5>
-                <form [formGroup]="updateForm" (ngSubmit)="updateUser()">
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label class="form-label">Nombre<span class="text-danger">*</span></label>
-                      <input formControlName="nombre_usuario" type="text" class="form-control">
-                      <div *ngIf="updateForm.get('nombre_usuario').invalid && (updateForm.get('nombre_usuario').dirty || updateForm.get('nombre_usuario').touched)"
-                          class="text-danger small">
-                        Nombre es requerido
-                      </div>
+            <!-- Otro item -->
+            <li class="list-group-item">
+              <div class="d-flex align-items-start">
+                <div class="bg-light rounded-circle me-3 p-3">
+                  <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="mb-1">Ana María López</h6>
+                    <small class="text-muted">hace 1 día</small>
+                  </div>
+                  <p class="mb-1">
+                    <span class="badge bg-success">Cotización fontanería</span>
+                  </p>
+                  <p class="text-muted mb-0">
+                    "Presupuesto para cambio completo de tuberías en edificio antiguo"
+                  </p>
+                  <div class="mt-2 d-flex justify-content-end gap-1">
+                    <button class="btn btn-success btn-sm btn-listo">
+                      <i class="bi bi-check-circle"></i> Listo
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-eliminar">
+                      <i class="bi bi-trash"></i> Eliminar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cotizaciones respondidas -->
+    <div class="col-12 col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0"><i class="bi bi-check-circle-fill"></i> Respondidas</h5>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush" id="respondidas-list">
+            <!-- Item respondido -->
+            <li class="list-group-item bg-light">
+              <div class="d-flex align-items-start">
+                <img src="https://via.placeholder.com/50"
+                     class="rounded-circle me-3"
+                     alt="Imagen usuario">
+                <div class="flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="mb-1">Carlos Martínez</h6>
+                    <small class="text-muted">hace 3 días</small>
+                  </div>
+                  <p class="mb-1">
+                    <span class="badge bg-danger">Cotización gas</span>
+                  </p>
+                  <p class="text-muted mb-0">
+                    "Revisión completa instalación de gas natural"
+                  </p>
+                  <div class="mt-2 d-flex justify-content-between align-items-center">
+                    <div class="text-success">
+                      <i class="bi bi-check2-all"></i> Respondida el 05/03/2024
                     </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label">Email<span class="text-danger">*</span></label>
-                      <input formControlName="email_usuario" type="email" class="form-control">
-                      <div *ngIf="updateForm.get('email_usuario').invalid && (updateForm.get('email_usuario').dirty || updateForm.get('email_usuario').touched)"
-                          class="text-danger small">
-                        Email inválido
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label">Apellido Paterno<span class="text-danger">*</span></label>
-                      <input formControlName="ap_usuario" type="text" class="form-control">
-                      <div *ngIf="updateForm.get('ap_usuario').invalid && (updateForm.get('ap_usuario').dirty || updateForm.get('ap_usuario').touched)"
-                          class="text-danger small">
-                        Apellido paterno es requerido
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label">Apellido Materno</label>
-                      <input formControlName="am_usuario" type="text" class="form-control">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label">Teléfono</label>
-                      <input formControlName="telefono" type="tel" class="form-control">
-                    </div>
-
-                    <div class="col-md-6">
-                      <label class="form-label">Ubicación</label>
-                      <input formControlName="ubicacion" type="text" class="form-control">
-                    </div>
-
-                    <div class="col-12">
-                      <label class="form-label">Biografía</label>
-                      <textarea formControlName="biografia" class="form-control" rows="3"></textarea>
-                    </div>
-
-                    <div class="col-12 text-end mt-4">
-                      <button type="button" class="btn btn-secondary me-2" (click)="cancelar()">
-                        Cancelar
+                    <div class="d-flex gap-1">
+                      <button class="btn btn-outline-secondary btn-sm btn-deshacer">
+                        <i class="bi bi-arrow-counterclockwise"></i> Deshacer
                       </button>
-                      <button type="submit" class="btn btn-primary" [disabled]="updateForm.invalid">
-                        <i class="bi bi-save me-2"></i>Guardar
+                      <button class="btn btn-danger btn-sm btn-eliminar">
+                        <i class="bi bi-trash"></i> Eliminar
                       </button>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
-</main>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('click', function(e) {
+    const target = e.target.closest('button');
+    if (!target) return;
+
+    const li = target.closest('li.list-group-item');
+    if (!li) return;
+
+    if (target.classList.contains('btn-listo')) {
+      moveToResponded(li);
+    } else if (target.classList.contains('btn-deshacer')) {
+      moveToPending(li);
+    } else if (target.classList.contains('btn-eliminar')) {
+      li.remove();
+    }
+  });
+
+  function moveToResponded(li) {
+    const newLi = li.cloneNode(true);
+    newLi.classList.add('bg-light');
+
+    const buttonsDiv = newLi.querySelector('.d-flex.justify-content-end');
+    if (!buttonsDiv) return;
+
+    const fecha = new Date().toLocaleDateString('es-ES');
+    const newContent = `
+      <div class="mt-2 d-flex justify-content-between align-items-center">
+        <div class="text-success">
+          <i class="bi bi-check2-all"></i> Respondida el ${fecha}
+        </div>
+        <div class="d-flex gap-1">
+          <button class="btn btn-outline-secondary btn-sm btn-deshacer">
+            <i class="bi bi-arrow-counterclockwise"></i> Deshacer
+          </button>
+          <button class="btn btn-danger btn-sm btn-eliminar">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+        </div>
+      </div>
+    `;
+
+    buttonsDiv.outerHTML = newContent;
+    document.getElementById('respondidas-list').appendChild(newLi);
+    li.remove();
+  }
+
+  function moveToPending(li) {
+    const newLi = li.cloneNode(true);
+    newLi.classList.remove('bg-light');
+
+    const buttonsDiv = newLi.querySelector('.d-flex.justify-content-between');
+    if (!buttonsDiv) return;
+
+    const newContent = `
+      <div class="mt-2 d-flex justify-content-end gap-1">
+        <button class="btn btn-success btn-sm btn-listo">
+          <i class="bi bi-check-circle"></i> Listo
+        </button>
+        <button class="btn btn-danger btn-sm btn-eliminar">
+          <i class="bi bi-trash"></i> Eliminar
+        </button>
+      </div>
+    `;
+
+    buttonsDiv.outerHTML = newContent;
+    document.getElementById('pendientes-list').appendChild(newLi);
+    li.remove();
+  }
+});
+</script>

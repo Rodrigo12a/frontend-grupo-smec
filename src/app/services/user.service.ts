@@ -38,6 +38,7 @@ export class UserService {
       );
 }
 getUserById(userId: number): Observable<any> {
+  console.log(`Obteniendo usuario con URL: ${this.myAppUrl}${this.myApiUrl}${userId}`);
   return this.http.get(`${this.myAppUrl}${this.myApiUrl}${userId}`);
 }
 updateUser(userId: number, updatedData: Partial<usuario>): Observable<any> {
