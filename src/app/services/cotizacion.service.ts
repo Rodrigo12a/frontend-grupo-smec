@@ -16,8 +16,13 @@ export class CotizacionService {
     this.myApiUrl = 'api/cotizacion/';
   }
 
-  register(cotizacion: Cotizacion): Observable<any> {
-    return this.http.post(`${this.myAppUrl}${this.myApiUrl}`, cotizacion);
+
+  register(cotizacion: Cotizacion) {
+    return this.http.post('tu-endpoint', {
+      id_tipo_cotizacion: cotizacion.id_tipo_cotizacion,
+      mensaje_adicional: cotizacion.mensaje_adicional,
+      id_usuario: cotizacion.id_usuario
+    });
   }
 }
 //mysql://root:gMimNidewoBuTtAyDodFxEIRQMfhKFwr@shinkansen.proxy.rlwy.net:25181/railway
