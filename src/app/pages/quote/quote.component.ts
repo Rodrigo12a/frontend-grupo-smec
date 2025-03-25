@@ -5,6 +5,7 @@ import { FormGroup, ReactiveFormsModule, Validators, FormBuilder} from '@angular
 import { Cotizacion } from '../../interfaces/contizacion';
 import {jwtDecode} from 'jwt-decode';
 import { CotizacionService } from '../../services/cotizacion.service';
+import { ToastrService } from 'ngx-toastr'; // Importar Toastr
 
 interface DecodedToken {
   id: number;
@@ -18,18 +19,29 @@ interface DecodedToken {
 })
 export class QuoteComponent {
   form: FormGroup;
-  constructor(private fb: FormBuilder, private cotizacionService: CotizacionService ) {
+
+  // Opciones para el select
+  tipoCotizacionOptions = [
+    { id_tipo_cotizacion: 1, nombre_cotizacion: 'Ingeniería Eléctrica' },
+    { id_tipo_cotizacion: 2, nombre_cotizacion: 'Mantenimiento Industrial' },
+    { id_tipo_cotizacion: 3, nombre_cotizacion: 'Soldadura Especializada' },
+    { id_tipo_cotizacion: 4, nombre_cotizacion: 'Obras Civiles' }
+  ];
+
+  constructor(
+    private fb: FormBuilder,
+    private cotizacionService: CotizacionService,
+    private toastr: ToastrService // Inyectar Toastr
+  ) {
     this.form = this.fb.group({
       tipo_cotizacion: ['', [Validators.required]],
       mensaje_adicional: ['', Validators.required]
     });
   }
 
-
   addCotizacion() {
-    // Validar el formulario antes de enviar
     if (this.form.invalid) {
-      alert('Por favor completa todos los campos requeridos');
+      this.toastr.warning('Por favor completa todos los campos requeridos');
       return;
     }
 
@@ -42,11 +54,11 @@ export class QuoteComponent {
         userId = decoded.id;
       } catch (error) {
         console.error("Error al decodificar el token:", error);
-        alert('Error de autenticación');
+        this.toastr.error('Error de autenticación');
         return;
       }
     } else {
-      alert('Debes iniciar sesión para crear una cotización');
+      this.toastr.error('Debes iniciar sesión para crear una cotización');
       return;
     }
 
@@ -56,16 +68,14 @@ export class QuoteComponent {
       id_usuario: userId
     };
 
-    // Usar el servicio para enviar la cotización
     this.cotizacionService.register(cotizacion).subscribe({
       next: (response) => {
-        console.log('Cotización creada:', response);
-        alert('Cotización creada exitosamente');
-        this.form.reset();  // Limpiar el formulario
+        this.toastr.success('Cotización creada exitosamente');
+        this.form.reset();
       },
       error: (err) => {
         console.error('Error al crear cotización:', err);
-        alert('Error al crear la cotización');
+        this.toastr.error('Error al crear la cotización');
       }
     });
   }
