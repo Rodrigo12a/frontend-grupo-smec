@@ -10,6 +10,10 @@ import { ToastrService } from 'ngx-toastr'; // Importar Toastr
 interface DecodedToken {
   id: number;
 }
+interface TipoCotizacion {
+  id_tipo_cotizacion: number;
+  nombre_cotizacion: string;
+}
 
 @Component({
   selector: 'app-quote',
@@ -21,7 +25,7 @@ export class QuoteComponent {
   form: FormGroup;
 
   // Opciones para el select
-  tipoCotizacionOptions = [
+  tipoCotizacionOptions: TipoCotizacion[] = [
     { id_tipo_cotizacion: 1, nombre_cotizacion: 'Ingeniería Eléctrica' },
     { id_tipo_cotizacion: 2, nombre_cotizacion: 'Mantenimiento Industrial' },
     { id_tipo_cotizacion: 3, nombre_cotizacion: 'Soldadura Especializada' },
