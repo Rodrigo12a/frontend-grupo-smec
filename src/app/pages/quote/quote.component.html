@@ -11,10 +11,10 @@
       <form [formGroup]="form" (ngSubmit)="addCotizacion()">
         <div class="mb-3">
           <label for="cotizacion" class="form-label">Tipo de Cotización</label>
-          <select formControlName="tipo_cotizacion" class="form-select" id="cotizacion" required>
+          <select formControlName="id_tipo_cotizacion" class="form-select" id="cotizacion" required>
             <option value="" disabled selected>Seleccione una opción</option>
-            <!-- Se generan las opciones usando el arreglo de tipoCotizacionOptions -->
-            <option *ngFor="let option of tipoCotizacionOptions" [value]="option.id_tipo_cotizacion">
+            <option *ngFor="let option of tipoCotizacionOptions"
+                    [value]="option.id_tipo_cotizacion">
               {{ option.nombre_cotizacion }}
             </option>
           </select>

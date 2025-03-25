@@ -39,7 +39,7 @@ export class QuoteComponent {
     private toastr: ToastrService // Inyectar Toastr
   ) {
     this.form = this.fb.group({
-      tipo_cotizacion: ['', [Validators.required]],
+      id_tipo_cotizacion: ['', [Validators.required]],
       mensaje_adicional: ['', Validators.required],
     });
   }
@@ -68,7 +68,7 @@ export class QuoteComponent {
     }
 
     const cotizacion: Cotizacion = {
-      tipo_cotizacion: this.form.value.tipo_cotizacion,
+      id_tipo_cotizacion: this.form.value.tipo_cotizacion,
       mensaje_adicional: this.form.value.mensaje_adicional,
       id_usuario: userId
     };
