@@ -70,6 +70,7 @@ export class ProfileComponent implements OnInit {
           ? 'assets/images/avatars/avatar-02.svg'
           : 'assets/images/avatars/avatar-01.svg';
 
+          this.profileForm.disable();
         // Llenar formulario con los datos decodificados
         this.profileForm.patchValue({
           nombre_usuario: decoded.nombre,
