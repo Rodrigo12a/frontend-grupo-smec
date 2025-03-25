@@ -7,11 +7,11 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 interface DecodedToken {
-  nombre_usuario: string;
-  ap_usuario: string;
-  am_usuario?: string;
-  email_usuario: string;
-  sexo_usuario: number | string;
+  nombre: string;
+  apellidoP: string;
+  apellidoM: string;
+  email: string;
+  sexo: number | string;
   // Otras propiedades del token, si las hay
 }
 
@@ -60,9 +60,9 @@ export class ProfileComponent implements OnInit {
         const decoded: DecodedToken = jwtDecode(token);
         console.log('Decoded token:', decoded);
 
-        // Verificar y asignar un valor predeterminado si sexo_usuario es undefined o null
-        const sexoValue = (decoded.sexo_usuario !== undefined && decoded.sexo_usuario !== null)
-          ? decoded.sexo_usuario.toString()
+        // Verificar y asignar un valor predeterminado si sexo es undefined o null
+        const sexoValue = (decoded.sexo !== undefined && decoded.sexo !== null)
+          ? decoded.sexo.toString()
           : '0';
 
         this.sexo_usuario = Number(sexoValue);
@@ -72,10 +72,10 @@ export class ProfileComponent implements OnInit {
 
         // Llenar formulario con los datos decodificados
         this.profileForm.patchValue({
-          nombre_usuario: decoded.nombre_usuario,
-          ap_usuario: decoded.ap_usuario,
-          am_usuario: decoded.am_usuario || '',
-          email_usuario: decoded.email_usuario,
+          nombre_usuario: decoded.nombre,
+          ap_usuario: decoded.apellidoP,
+          am_usuario: decoded.apellidoM || '',
+          email_usuario: decoded.email,
           sexo_usuario: sexoValue
         });
       } catch (error) {
