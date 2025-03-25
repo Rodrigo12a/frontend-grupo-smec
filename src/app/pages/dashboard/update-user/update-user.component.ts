@@ -7,16 +7,13 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../services/user.service';
 
 interface DecodedToken {
-  id: number;
-  nombre: string;
-  apellidoP: string;
-  apellidoM?: string;
-  email: string;
-  telefono?: string;
-  ubicacion?: string;
-  biografia?: string;
-  sexo?: number | string;
-  // Agrega otras propiedades según sea necesario
+  id_usuario: number;
+  nombre_usuario: string;
+  ap_usuario: string;
+  am_usuario: string;
+  email_usuario: string;
+  sexo_usuario: number | string;
+
 }
 
 @Component({
@@ -44,10 +41,10 @@ export class UpdateUserComponent implements OnInit {
 
   private initializeForm(): void {
     this.updateForm = this.fb.group({
-      nombre: ['', Validators.required],
-      apellidoP: ['', Validators.required],
-      apellidoM: [''],
-      email: ['', [Validators.required, Validators.email]],
+      nombre_usuario: ['', Validators.required],
+      ap_usuario: ['', Validators.required],
+      am_usuario: [''],
+      email_usuario: ['', [Validators.required, Validators.email]],
       telefono: [''],
       ubicacion: [''],
       biografia: ['']
@@ -59,16 +56,13 @@ export class UpdateUserComponent implements OnInit {
     if (token) {
       try {
         const decoded: DecodedToken = jwtDecode(token);
-        this.userId = decoded.id;
+        this.userId = decoded.id_usuario;
         // Actualiza el formulario con los datos decodificados
         this.updateForm.patchValue({
-          nombre: decoded.nombre,
-          apellidoP: decoded.apellidoP,
-          apellidoM: decoded.apellidoM || '',
-          email: decoded.email,
-          telefono: decoded.telefono || '',
-          ubicacion: decoded.ubicacion || '',
-          biografia: decoded.biografia || ''
+          nombre_usuario: decoded.nombre_usuario,
+          ap_usuario: decoded.ap_usuario,
+          am_usuario: decoded.am_usuario,
+          email_usuario: decoded.email_usuario,
         });
       } catch (error) {
         console.error('Error decodificando token:', error);
@@ -85,7 +79,6 @@ export class UpdateUserComponent implements OnInit {
       return;
     }
     const updatedUser = { ...this.updateForm.value };
-    this.userService.updateUser
     this.userService.updateUser(this.userId, updatedUser).subscribe({
       next: (response) => {
         this.toastr.success('Usuario actualizado correctamente');
