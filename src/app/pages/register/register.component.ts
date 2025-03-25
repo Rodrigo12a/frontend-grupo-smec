@@ -33,7 +33,7 @@ export class RegisterComponent {
   password_usuario: string = '';
   confirmarP_usuario: string = '';
   imagen_usuario: string | null= null;
-  id_rol: number | null = null;
+  id_rol: number = 125;
   loading: boolean = false;
 
   constructor(private toastr: ToastrService,
@@ -71,7 +71,7 @@ export class RegisterComponent {
     email_usuario: this.email_usuario,
     password_usuario: this.password_usuario,
     imagen_usuario:  null,
-    id_rol: null
+    id_rol: 125
     }
 
     this.loading = true;
