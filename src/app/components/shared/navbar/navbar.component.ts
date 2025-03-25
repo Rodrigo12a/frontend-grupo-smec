@@ -8,6 +8,10 @@ import { jwtDecode } from 'jwt-decode';
 interface DecodedToken {
   nombre: string;
   apellidoP: string;
+<<<<<<< HEAD
+=======
+  id: number,
+>>>>>>> parent of 2e10660 (rutas)
   rol?: number;
   sexo_usuario: number | string; // Permitir string
   sexo?: number | string; // Versión alternativa del nombre
