@@ -25,4 +25,3 @@ export class CotizacionService {
     });
   }
 }
-//mysql://root:gMimNidewoBuTtAyDodFxEIRQMfhKFwr@shinkansen.proxy.rlwy.net:25181/railway
