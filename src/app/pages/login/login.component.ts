@@ -9,6 +9,12 @@ import { UserService } from '../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SpinnerComponent } from "../../shared/spinner/spinner.component";
 import { ErrorService } from '../../services/error.service';
+import { jwtDecode } from 'jwt-decode';
+
+interface DecodedToken {
+  id_rol: number;
+}
+
 @Component({
   selector: 'app-login',
   imports: [
@@ -51,9 +57,25 @@ export class LoginComponent {
     this.loading = true;
     this._userService.Login(userLogin).subscribe({
       next: (token) => {
-        console.log(token);
+        localStorage.setItem('token', token);
 
-        this.router.navigate(['/user'])
+        try {
+          const decoded = jwtDecode<DecodedToken>(token);
+
+          if (decoded.id_rol === 745) {
+            this.router.navigate(['/user']);
+          } else if (decoded.id_rol === 125) {
+            this.router.navigate(['/']);
+          } else {
+            this.router.navigate(['/']);
+            this.toastr.warning('Rol de usuario no reconocido');
+          }
+        } catch (error) {
+          console.error('Error decodificando token:', error);
+          this.router.navigate(['/']);
+        }
+
+        this.loading = false;
       },
       error: (e: HttpErrorResponse) => {
         this._errorService.msgError(e);
