@@ -44,6 +44,7 @@ export class UpdateUserComponent implements OnInit {
   private loadUserData(): void {
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
+      console.log('ID obtenido de la URL:', this.userId); 
       if (this.userId) {
         this.userService.getUserById(this.userId).subscribe({
           next: (user) => {
