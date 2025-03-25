@@ -18,10 +18,11 @@ export class CotizacionService {
 
 
   register(cotizacion: Cotizacion) {
-    return this.http.post('tu-endpoint', {
+    return this.http.post(this.myAppUrl + this.myApiUrl, {
       id_tipo_cotizacion: cotizacion.id_tipo_cotizacion,
       mensaje_adicional: cotizacion.mensaje_adicional,
       id_usuario: cotizacion.id_usuario
     });
+
   }
 }
