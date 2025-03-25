@@ -20,7 +20,7 @@ interface Quote {
   styleUrl: './quote-dashboard.component.scss'
 })
 
-export class QuotesComponent {
+export class QuoteDashboardComponent {
   pendingQuotes: Quote[] = [
     {
       id: 1,

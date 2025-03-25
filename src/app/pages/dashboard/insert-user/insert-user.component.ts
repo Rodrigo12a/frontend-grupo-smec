@@ -7,9 +7,10 @@ import { UserService } from '../../../services/landing.service';
 import { UserCrudService } from '../../../services/user-crud.service';
 import { SpinnerComponent } from "../../../shared/spinner/spinner.component";
 import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-insert-user',
-  imports: [SidebarComponent, ReactiveFormsModule, SpinnerComponent],
+  imports: [SidebarComponent, ReactiveFormsModule, SpinnerComponent, CommonModule],
   templateUrl: './insert-user.component.html',
   styleUrl: './insert-user.component.scss'
 })
