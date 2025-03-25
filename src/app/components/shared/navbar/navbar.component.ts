@@ -4,14 +4,13 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
-// Corregido: agregar posibles variantes del nombre de la propiedad
 interface DecodedToken {
+  id_rol: number; 
   nombre: string;
   apellidoP: string;
-  rol?: number;
-  sexo_usuario: number | string; // Permitir string
-  sexo?: number | string; // Versión alternativa del nombre
-  gender?: number | string; // Otra posible variante
+  sexo_usuario: number | string;
+  sexo?: number | string;
+  gender?: number | string;
 }
 
 @Component({
@@ -28,9 +27,8 @@ interface DecodedToken {
 export class NavbarComponent implements OnInit {
   registred: boolean = false;
   userName: string = '';
-  userRole: number = 0;
   id_rol: number = 0;
-  sexo_usuario: number = 0; // Siempre numérico
+  sexo_usuario: number = 0;
 
   constructor(private router: Router) {}
 
@@ -45,13 +43,12 @@ export class NavbarComponent implements OnInit {
     if (token && token.split('.').length === 3) {
       try {
         const decoded: DecodedToken = jwtDecode(token);
-        console.log('Token decodificado:', decoded); // Para debug
 
-        // Corregido: manejar diferentes nombres y tipos
+        // Asegurar que id_rol sea numérico
+        this.id_rol = Number(decoded.id_rol) || 0;
+
         this.sexo_usuario = this.parseSexoUsuario(decoded);
-
         this.userName = `${decoded.nombre} ${decoded.apellidoP}`;
-        this.id_rol = decoded.rol ?? 0;
 
       } catch (error) {
         console.error('Error decodificando token:', error);
@@ -62,10 +59,9 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // Nuevo método para manejar la lógica de sexo_usuario
   private parseSexoUsuario(decoded: DecodedToken): number {
     const value = decoded.sexo_usuario ?? decoded.sexo ?? decoded.gender ?? 0;
-    return Number(value); // Convertir a número
+    return Number(value);
   }
 
   private clearAuthState(): void {
