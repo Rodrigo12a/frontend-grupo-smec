@@ -4,7 +4,7 @@
     <div class="col-12 px-4">
       <!-- Encabezado -->
       <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2 mb-0">Mi Perfil</h1>
+        <h1 class="h2 mb-0">Inicio</h1>
       </div>
 
       <!-- Información extra (resumen de datos del perfil) -->
@@ -45,44 +45,53 @@
           <div class="card shadow-sm">
             <div class="card-body">
               <h5 class="card-title mb-4">Información Personal</h5>
-              <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+              <!-- profile.component.html (cambios relevantes) -->
+
+              <!-- Cambiar la etiqueta <form> a un div y remover el evento de submit -->
+              <div [formGroup]="profileForm">
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label class="form-label">Nombre</label>
                     <input formControlName="nombre_usuario"
-                           type="text"
-                           class="form-control">
+                          type="text"
+                          class="form-control bg-light"
+                          readonly>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Apellido paterno</label>
                     <input formControlName="ap_usuario"
-                           type="text"
-                           class="form-control">
+                          type="text"
+                          class="form-control bg-light"
+                          readonly>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Apellido Materno</label>
                     <input formControlName="am_usuario"
-                           type="text"
-                           class="form-control">
+                          type="text"
+                          class="form-control bg-light"
+                          readonly>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Correo electrónico</label>
                     <input formControlName="email_usuario"
-                           type="email"
-                           class="form-control">
+                          type="email"
+                          class="form-control bg-light"
+                          readonly>
                   </div>
                   <div class="col-md-4 mt-3">
-                    <label class="form-label">Sexo <span class="text-danger">*</span></label>
-                    <select formControlName="sexo_usuario"
-                            class="form-select"
-                            required>
-                      <option value="">Seleccionar...</option>
-                      <option value="1">Masculino</option>
-                      <option value="0">Femenino</option>
-                    </select>
+                    <label class="form-label">Sexo</label>
+                    <div class="col-md-4 mt-3">
+                      <label class="form-label">Sexo</label>
+                      <select formControlName="sexo_usuario"
+                              class="form-select bg-light">
+                        <option value="">Seleccionar...</option>
+                        <option value="1">Masculino</option>
+                        <option value="0">Femenino</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
