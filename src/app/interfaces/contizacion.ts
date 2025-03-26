@@ -9,6 +9,6 @@ export interface Cotizacion {
   id_usuario: number;
 
   /* Campos relacionales opcionales (si necesitas incluir datos relacionados)
-  tipo_cotizacion?: TipoCotizacion;  // Si tienes esta interfaz
-  usuario?: usuario;                 */
+  tipo_cotizacion?: TipoCotizacion; */ // Si tienes esta interfaz
+  usuario?: usuario;
 }

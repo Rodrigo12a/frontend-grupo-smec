@@ -22,6 +22,7 @@ export class CotizacionesComponent {
   getListCotizacion() {
     this._cotizacionesService.getCotizacion().subscribe({
       next: (data: Cotizacion[]) => { // Asegura el tipo de respuesta
+        console.log('Datos recibidos:', data); // Revisa en la consola del navegador
         this.listCotizacion = data;
       },
       error: (err) => {
