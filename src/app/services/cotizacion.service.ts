@@ -25,4 +25,8 @@ export class CotizacionService {
     });
 
   }
+
+  getCotizacion(): Observable<Cotizacion>{
+    return this.http.get<Cotizacion>(this.myAppUrl + this.myApiUrl,);
+  }
 }
