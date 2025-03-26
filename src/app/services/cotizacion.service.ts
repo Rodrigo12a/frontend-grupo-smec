@@ -17,12 +17,11 @@ export class CotizacionService {
   }
 
 
-  register(cotizacion: Cotizacion) {
-    return this.http.post(this.myAppUrl + this.myApiUrl, {
-      id_tipo_cotizacion: cotizacion.id_tipo_cotizacion,
-      mensaje_adicional: cotizacion.mensaje_adicional,
-      id_usuario: cotizacion.id_usuario
-    });
+  getCotizaciones(): Observable<Cotizacion[]> {
+    return this.http.get<Cotizacion[]>(`${this.myAppUrl}${this.myApiUrl}`);
+  }
 
+  updateEstado(id: number, estado: string): Observable<any> {
+    return this.http.patch(`${this.myAppUrl}${this.myApiUrl}${id}`, { estado });
   }
 }
