@@ -21,7 +21,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <h6 class="mb-1">Usuario #{{ cotizacion.id_usuario }}</h6>
                     <span class="badge bg-success">
-                      {{ cotizacion.id_tipo_cotizacion || 'Sin categoría' }}
+                      {{ cotizacion.id_tipo_cotizacion | tipoCotizacion }}
                     </span>
                   </div>
                   <p class="text-muted mt-2 mb-0">

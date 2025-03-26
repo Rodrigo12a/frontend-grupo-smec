@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { CotizacionService } from '../../../services/cotizacion.service';
 import { Cotizacion } from '../../../interfaces/contizacion';
 import { CommonModule } from '@angular/common';
+import { TipoCotizacionPipe } from '../../../pipes/pipes';
 
 @Component({
   selector: 'app-cotizaciones',
-  imports: [CommonModule],
+  imports: [CommonModule, TipoCotizacionPipe],
   templateUrl: './cotizaciones.component.html',
   styleUrl: './cotizaciones.component.scss'
 })
