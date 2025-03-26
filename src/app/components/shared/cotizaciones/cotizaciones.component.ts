@@ -11,22 +11,20 @@ import { CotizacionService } from '../../../services/cotizacion.service';
 })
 export class CotizacionesComponent {
 
-  constructor(private _cotizacionesService : CotizacionService){
+  constructor(private _cotizacionesService: CotizacionService) { }
 
+  ngOnInit(): void {
+    this.getListCotizacion();
   }
 
-  ngOnInit(): void{
-    this.getListCotizacion
-
+  getListCotizacion() {
+    this._cotizacionesService.getCotizacion().subscribe({
+      next: (data) => {
+        console.log("Datos de cotizaciones:", data);
+      },
+      error: (err) => {
+        console.error("Error obteniendo cotizaciones:", err);
+      }
+    });
   }
-
-  getListCotizacion(){
-    this._cotizacionesService.getCotizacion().subscribe((data) => {
-      console.log(data);
-
-    })
-
-  }
-
-
 }
