@@ -9,6 +9,6 @@ import { DashboardService } from '../../../services/dashboard.service';
   styleUrl: './cotizaciones.component.scss'
 })
 export class CotizacionesComponent {
-    
+
 
 }
